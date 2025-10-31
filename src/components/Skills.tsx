@@ -2,71 +2,59 @@ import { Code2, Palette, Zap, Smartphone, Database, GitBranch } from "lucide-rea
 
 const skills = [
   {
-    icon: Code2,
-    title: "Modern Frameworks",
-    description: "React, Vue, Next.js, TypeScript",
-    color: "primary"
+    icon: <Code2 size={28} strokeWidth={1.5} />,
+    name: "REACT"
   },
   {
-    icon: Palette,
-    title: "Design Systems",
-    description: "Tailwind, CSS-in-JS, Figma to Code",
-    color: "accent"
+    icon: <Code2 size={28} strokeWidth={1.5} />,
+    name: "TYPESCRIPT"
   },
   {
-    icon: Zap,
-    title: "Performance",
-    description: "Optimization, Lazy Loading, SSR",
-    color: "primary"
+    icon: <Palette size={28} strokeWidth={1.5} />,
+    name: "TAILWIND CSS"
   },
   {
-    icon: Smartphone,
-    title: "Responsive Design",
-    description: "Mobile-first, Cross-browser",
-    color: "accent"
+    icon: <Zap size={28} strokeWidth={1.5} />,
+    name: "NEXT.JS"
   },
   {
-    icon: Database,
-    title: "State Management",
-    description: "Redux, Zustand, React Query",
-    color: "primary"
+    icon: <Smartphone size={28} strokeWidth={1.5} />,
+    name: "RESPONSIVE"
   },
   {
-    icon: GitBranch,
-    title: "Version Control",
-    description: "Git, GitHub, CI/CD",
-    color: "accent"
+    icon: <Database size={28} strokeWidth={1.5} />,
+    name: "STATE MGMT"
+  },
+  {
+    icon: <GitBranch size={28} strokeWidth={1.5} />,
+    name: "GIT"
+  },
+  {
+    icon: <Code2 size={28} strokeWidth={1.5} />,
+    name: "JAVASCRIPT"
   }
 ];
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 px-4 bg-secondary/30">
-      <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Skills & Expertise
+    <section id="skills" className="py-32 px-4">
+      <div className="container mx-auto max-w-5xl">
+        <h2 className="text-3xl md:text-4xl font-light mb-16 tracking-tight">
+          SKILLS
         </h2>
-        <p className="text-center text-muted-foreground mb-12 text-lg">
-          Technologies and tools I work with
-        </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8">
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="group bg-card/50 backdrop-blur-sm border border-primary/10 rounded-2xl p-6 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1"
+              className="group"
             >
-              <div className={`w-14 h-14 rounded-xl bg-${skill.color}/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <skill.icon className={`w-7 h-7 text-${skill.color}`} />
+              <div className="text-foreground mb-3 opacity-60 group-hover:opacity-100 transition-opacity">
+                {skill.icon}
               </div>
-              
-              <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors duration-300">
-                {skill.title}
+              <h3 className="font-light text-sm tracking-wider">
+                {skill.name}
               </h3>
-              
-              <p className="text-muted-foreground">
-                {skill.description}
-              </p>
             </div>
           ))}
         </div>

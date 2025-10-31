@@ -30,60 +30,33 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          Featured Projects
+    <section id="projects" className="py-32 px-4">
+      <div className="container mx-auto max-w-5xl">
+        <h2 className="text-3xl md:text-4xl font-light mb-4 tracking-tight">
+          PROJECTS
         </h2>
-        <p className="text-center text-muted-foreground mb-12 text-lg">
-          Some of my recent work
+        <p className="text-muted-foreground mb-16 font-light">
+          Click on project to read more.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group bg-card/50 backdrop-blur-sm border border-primary/10 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2"
+              className="group cursor-pointer"
             >
-              <div className={`h-48 bg-gradient-to-br ${project.gradient} opacity-60 group-hover:opacity-80 transition-opacity duration-300`} />
+              <div className={`aspect-[3/4] bg-gradient-to-br ${project.gradient} mb-4 transition-opacity duration-300 group-hover:opacity-80`} />
               
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
-                  {project.title}
-                </h3>
-                
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary border border-primary/20"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="flex gap-3">
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="border-primary/50 hover:bg-primary/10 transition-all duration-300"
-                  >
-                    <Github className="w-4 h-4 mr-2" />
-                    Code
-                  </Button>
-                  <Button 
-                    size="sm"
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300"
-                  >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Live Demo
-                  </Button>
-                </div>
+              <h3 className="text-lg font-light mb-2 group-hover:opacity-60 transition-opacity">
+                {project.title}
+              </h3>
+              
+              <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+                {project.tags.map((tag, tagIndex) => (
+                  <span key={tagIndex}>
+                    {tag}{tagIndex < project.tags.length - 1 ? ' /' : ''}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
