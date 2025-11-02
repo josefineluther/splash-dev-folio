@@ -32,6 +32,14 @@ const skills = [
   {
     icon: <Code2 size={28} strokeWidth={1.5} />,
     name: "JAVASCRIPT"
+  },
+  {
+    icon: <Code2 size={28} strokeWidth={1.5} />,
+    name: "VUE"
+  },
+  {
+    icon: <Zap size={28} strokeWidth={1.5} />,
+    name: "SVELTEKIT"
   }
 ];
 
