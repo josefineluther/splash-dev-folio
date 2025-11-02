@@ -1,11 +1,15 @@
+import logoRed from "@/assets/logo-red.png";
+
 const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-20">
       <div className="container mx-auto max-w-3xl text-center animate-fade-in">
         <div className="mb-12">
-          <div className="inline-block border-2 border-foreground px-4 py-2 mb-8">
-            <span className="text-sm font-medium tracking-wider">FD</span>
-          </div>
+          <img 
+            src={logoRed} 
+            alt="Logo" 
+            className="w-24 h-24 mx-auto mb-8"
+          />
         </div>
         
         <h1 className="text-4xl md:text-6xl font-light mb-8 leading-tight tracking-tight">
