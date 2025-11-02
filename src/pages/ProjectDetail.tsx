@@ -60,24 +60,24 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <div className="absolute top-8 right-8 z-50 flex gap-4">
+      <div className="absolute top-8 right-8 z-50 flex gap-6">
         <Link
           to={`/project/${prevId}`}
-          className="rounded-full bg-secondary text-secondary-foreground p-3 hover:opacity-80 transition-opacity"
+          className="text-primary hover:opacity-60 transition-opacity"
         >
-          <ChevronLeft size={24} />
+          <ChevronLeft size={32} strokeWidth={1.5} />
         </Link>
         <Link
           to={`/project/${nextId}`}
-          className="rounded-full bg-secondary text-secondary-foreground p-3 hover:opacity-80 transition-opacity"
+          className="text-primary hover:opacity-60 transition-opacity"
         >
-          <ChevronRight size={24} />
+          <ChevronRight size={32} strokeWidth={1.5} />
         </Link>
         <Link
           to="/"
-          className="rounded-full bg-primary text-primary-foreground p-3 hover:opacity-80 transition-opacity"
+          className="text-primary hover:opacity-60 transition-opacity"
         >
-          <X size={24} />
+          <X size={32} strokeWidth={1.5} />
         </Link>
       </div>
 
