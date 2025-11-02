@@ -32,7 +32,7 @@ const Contact = () => {
               I'm available for freelance work and full-time opportunities.
             </p>
             <div className="space-y-3">
-              <a href="mailto:hello@example.com" className="block hover:opacity-60 transition-opacity">
+              <a href="mailto:hello@example.com" className="inline-block hover:opacity-60 transition-opacity border-b-2 border-secondary pb-1">
                 hello@example.com
               </a>
               <div className="flex gap-6 pt-4">
@@ -40,10 +40,11 @@ const Contact = () => {
                   <a
                     key={index}
                     href={link.url}
-                    className="hover:opacity-60 transition-opacity"
+                    className="hover:opacity-60 transition-opacity inline-flex items-center gap-2 border-b-2 border-secondary pb-1"
                     aria-label={link.label}
                   >
                     {link.icon}
+                    <span className="text-sm">{link.label}</span>
                   </a>
                 ))}
               </div>

@@ -17,10 +17,10 @@ const Hero = () => {
         </p>
         
         <div className="flex gap-6 justify-center">
-          <a href="#projects" className="text-sm tracking-wider hover:opacity-60 transition-opacity border-b border-foreground pb-1">
+          <a href="#projects" className="text-sm tracking-wider hover:opacity-60 transition-opacity border-b-2 border-secondary pb-1">
             VIEW WORK
           </a>
-          <a href="#contact" className="text-sm tracking-wider hover:opacity-60 transition-opacity border-b border-foreground pb-1">
+          <a href="#contact" className="text-sm tracking-wider hover:opacity-60 transition-opacity border-b-2 border-secondary pb-1">
             CONTACT
           </a>
         </div>
