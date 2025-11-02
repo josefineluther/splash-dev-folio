@@ -28,11 +28,11 @@ const Contact = () => {
         
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-6 font-light">
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground">
               I'm available for freelance work and full-time opportunities.
             </p>
             <div className="space-y-3">
-              <a href="mailto:hello@example.com" className="block text-lg hover:text-primary transition-colors font-medium">
+              <a href="mailto:hello@example.com" className="block hover:opacity-60 transition-opacity">
                 hello@example.com
               </a>
               <div className="flex gap-6 pt-4">
@@ -40,7 +40,7 @@ const Contact = () => {
                   <a
                     key={index}
                     href={link.url}
-                    className="p-3 rounded-lg border-2 border-border hover:border-primary hover:text-primary transition-all hover:shadow-lg hover:shadow-primary/10"
+                    className="hover:opacity-60 transition-opacity"
                     aria-label={link.label}
                   >
                     {link.icon}

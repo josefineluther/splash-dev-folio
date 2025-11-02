@@ -36,8 +36,6 @@ const skills = [
 ];
 
 const Skills = () => {
-  const colors = ['text-primary', 'text-secondary', 'text-accent', 'text-foreground'];
-  
   return (
     <section id="skills" className="py-32 px-4">
       <div className="container mx-auto max-w-5xl">
@@ -45,13 +43,13 @@ const Skills = () => {
           SKILLS
         </h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8">
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="group p-6 rounded-lg border border-border hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/5 bg-card"
+              className="group"
             >
-              <div className={`${colors[index % colors.length]} mb-3 opacity-80 group-hover:opacity-100 transition-all group-hover:scale-110`}>
+              <div className="text-foreground mb-3 opacity-60 group-hover:opacity-100 transition-opacity">
                 {skill.icon}
               </div>
               <h3 className="font-light text-sm tracking-wider">
