@@ -6,19 +6,18 @@ const About = () => {
 
         <div className='space-y-6 text-muted-foreground font-light text-lg leading-relaxed'>
           <p>
-            I'm a frontend developer focused on creating clean, functional web experiences. With expertise in modern frameworks and a minimalist approach to
-            design, I build applications that are both beautiful and purposeful.
+            Hi, I’m Josefine — a frontend developer with a background in media and communication. I’m passionate about creating digital experiences that are not
+            only functional but also visually engaging and user-friendly. I enjoy combining my analytical mindset with my creative side to bring ideas to life
+            through clean code and thoughtful design.
           </p>
 
           <p>
-            My work emphasizes simplicity, attention to detail, and user-centered design. I believe the best interfaces are the ones that feel natural and
-            effortless.
+            My studies in Media and Communication, along with courses in web development, UX, and UI design, have given me a strong foundation to understand
+            both the technical and visual aspects of web creation. Currently, I’m studying Frontend Development at IT-Högskolan in Gothenburg, where I’ve
+            deepened my knowledge in modern web technologies.
           </p>
 
-          <p>
-            I study Frontend Development at IT-Högskolan in Gothenburg, Sweden. When I'm not coding, I enjoy crocheting, singing and spending time with my
-            family and my cat.
-          </p>
+          <p>When I'm not coding, I enjoy crocheting, singing, running and spending time with my family, friends and my cat.</p>
         </div>
       </div>
     </section>

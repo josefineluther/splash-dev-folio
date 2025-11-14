@@ -15,13 +15,13 @@ const socialLinks = [
 
 const Contact = () => {
   return (
-    <section id='contact' className='py-32 px-4 bg-muted/30'>
+    <section id='contact' className='py-32 px-4'>
       <div className='container mx-auto max-w-5xl'>
         <h2 className='text-3xl md:text-4xl font-light mb-16 tracking-tight'>CONTACT</h2>
 
         <div className='grid md:grid-cols-2 gap-12'>
           <div className='space-y-6 font-light'>
-            <p className='text-muted-foreground'>I'm available for freelance work and full-time opportunities.</p>
+            <p className='text-muted-foreground'>I'm open to new work opportunities!</p>
             <div className='space-y-3'>
               <a href='mailto:josefineluther@hotmail.se' className='inline-block hover:opacity-60 transition-opacity border-b-2 border-secondary pb-1'>
                 josefineluther@hotmail.se

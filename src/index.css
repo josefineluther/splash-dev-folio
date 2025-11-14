@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
 All colors MUST be HSL.
 */
 
@@ -25,6 +25,9 @@ All colors MUST be HSL.
 
     --muted: 30 20% 85%;
     --muted-foreground: 0 20% 45%;
+
+    --hero-primary: 30 25% 92%;
+    --hero-muted: 30 20% 85%;
 
     --accent: 15 75% 60%;
     --accent-foreground: 0 0% 98%;

@@ -30,21 +30,21 @@ const projects = [
   },
   {
     id: 2,
+    title: 'WordBond',
+    tags: ['Vue', 'School project'],
+    gradient: 'from-primary to-accent',
+    projectImage: wordbondImg,
+    description: '',
+    date: '2025'
+  },
+  {
+    id: 3,
     title: 'Galleri Gogh',
     tags: ['React', 'REST API', 'School project'],
     gradient: 'from-accent to-accent/60',
     projectImage: galleriGoghImg,
     description:
       'Galleri Gogh is an art gallery website that showcases various artworks fetched from the Met Museum REST API. The site features a clean and modern design, allowing users to browse through different art pieces and view detailed information about each artwork. This project helped me enhance my skills in working with APIs, managing state in React, and creating visually appealing layouts.',
-    date: '2025'
-  },
-  {
-    id: 3,
-    title: 'WordBond',
-    tags: ['Vue', 'School project'],
-    gradient: 'from-primary to-accent',
-    projectImage: wordbondImg,
-    description: '',
     date: '2025'
   },
   {
@@ -93,18 +93,15 @@ const ProjectDetail = () => {
   return (
     <div className='min-h-screen bg-background relative'>
       <div className='absolute top-8 right-8 z-50 flex gap-6'>
-        <Link to={`/project/${prevId}`} className='text-primary hover:opacity-60 transition-opacity'>
-          <ChevronLeft size={32} strokeWidth={1.5} />
-        </Link>
-        <Link to={`/project/${nextId}`} className='text-primary hover:opacity-60 transition-opacity'>
-          <ChevronRight size={32} strokeWidth={1.5} />
-        </Link>
         <Link to='/' className='text-primary hover:opacity-60 transition-opacity'>
-          <X size={32} strokeWidth={1.5} />
+          <X size={40} strokeWidth={1.5} />
         </Link>
       </div>
 
-      <div className='container mx-auto max-w-3xl px-4 py-16'>
+      <div className='container mx-auto max-w-6xl px-4 py-16 flex justify-between items-center gap-32'>
+        <Link to={`/project/${prevId}`} className='text-primary hover:opacity-60 transition-opacity'>
+          <ChevronLeft size={40} strokeWidth={1.5} />
+        </Link>
         <div className='grid md:grid-cols-1 gap-8 md:gap-12 items-center min-h-[80vh]'>
           <div className='flex flex-col justify-center space-y-6'>
             <h1 className='text-3xl md:text-3xl font-light tracking-tight uppercase'>{project.title}</h1>
@@ -124,6 +121,9 @@ const ProjectDetail = () => {
           </div>
           <img src={project.projectImage} className={`bg-gradient-to-br ${project.gradient} rounded-lg object-cover`} />
         </div>
+        <Link to={`/project/${nextId}`} className='text-primary hover:opacity-60 transition-opacity'>
+          <ChevronRight size={40} strokeWidth={1.5} />
+        </Link>
       </div>
     </div>
   )

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import womanReadingImg from '@/assets/woman_reading.jpg'
-import vanGoghImg from '@/assets/van_gogh.jpeg'
-import languagesImg from '@/assets/languages.jpeg'
+import galleryImg from '@/assets/gallery.jpg'
+import languagesImg from '@/assets/languages.jpg'
 import catImg from '@/assets/cat.jpg'
 import microcontrollerImg from '@/assets/microcontroller.jpg'
+import craftingImg from '@/assets/crafting.jpg'
+import snowImg from '@/assets/snow.jpg'
 
 const projects = [
   {
@@ -11,7 +13,7 @@ const projects = [
     title: 'Solving Pyssels',
     tags: ['Next.js', 'TypeScript', 'Tailwind'],
     gradient: 'from-accent to-primary/60',
-    firstImage: '',
+    firstImage: craftingImg,
     date: '2025-'
   },
   {
@@ -24,18 +26,18 @@ const projects = [
   },
   {
     id: 2,
-    title: 'Galleri Gogh',
-    tags: ['React', 'REST API', 'School project'],
-    gradient: 'from-accent to-accent/60',
-    firstImage: vanGoghImg,
-    date: '2025'
-  },
-  {
-    id: 3,
     title: 'WordBond',
     tags: ['Vue', 'School project'],
     gradient: 'from-primary to-accent',
     firstImage: languagesImg,
+    date: '2025'
+  },
+  {
+    id: 3,
+    title: 'Galleri Gogh',
+    tags: ['React', 'REST API', 'School project'],
+    gradient: 'from-accent to-accent/60',
+    firstImage: galleryImg,
     date: '2025'
   },
   {
@@ -59,14 +61,14 @@ const projects = [
     title: 'Apoceus',
     tags: ['Web design', 'Figma'],
     gradient: 'from-accent to-accent/60',
-    firstImage: '',
+    firstImage: snowImg,
     date: '2024'
   }
 ]
 
 const Projects = () => {
   return (
-    <section id='projects' className='py-32 px-4'>
+    <section id='projects' className='py-32 px-4 bg-muted/30'>
       <div className='container mx-auto max-w-5xl'>
         <h2 className='text-3xl md:text-4xl font-light mb-4 tracking-tight'>PROJECTS</h2>
         <p className='text-muted-foreground mb-16 font-light'>Click on project to read more.</p>
