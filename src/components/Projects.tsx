@@ -6,13 +6,13 @@ import catImg from '@/assets/cat.jpg'
 import microcontrollerImg from '@/assets/microcontroller.jpg'
 import craftingImg from '@/assets/crafting.jpg'
 import snowImg from '@/assets/snow.jpg'
+import heroImg from '@/assets/hero.jpg'
 
 const projects = [
   {
     id: 0,
     title: 'Solving Pyssels',
     tags: ['Next.js', 'TypeScript', 'Tailwind'],
-    gradient: 'from-accent to-primary/60',
     firstImage: craftingImg,
     date: '2025-'
   },
@@ -20,7 +20,6 @@ const projects = [
     id: 1,
     title: 'Bokhyllan webshop',
     tags: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Render', 'School project'],
-    gradient: 'from-primary to-primary/60',
     firstImage: womanReadingImg,
     date: '2025'
   },
@@ -28,7 +27,6 @@ const projects = [
     id: 2,
     title: 'WordBond',
     tags: ['Vue', 'School project'],
-    gradient: 'from-primary to-accent',
     firstImage: languagesImg,
     date: '2025'
   },
@@ -36,7 +34,6 @@ const projects = [
     id: 3,
     title: 'Galleri Gogh',
     tags: ['React', 'REST API', 'School project'],
-    gradient: 'from-accent to-accent/60',
     firstImage: galleryImg,
     date: '2025'
   },
@@ -44,7 +41,6 @@ const projects = [
     id: 4,
     title: 'Skiathos Cat Shelter',
     tags: ['JavaScript', 'REST API', 'School project'],
-    gradient: 'from-accent to-primary',
     firstImage: catImg,
     date: '2024'
   },
@@ -52,7 +48,6 @@ const projects = [
     id: 5,
     title: 'Decthings',
     tags: ['Web design', 'Figma'],
-    gradient: 'from-accent to-accent/60',
     firstImage: microcontrollerImg,
     date: '2024'
   },
@@ -60,7 +55,6 @@ const projects = [
     id: 6,
     title: 'Apoceus',
     tags: ['Web design', 'Figma'],
-    gradient: 'from-accent to-accent/60',
     firstImage: snowImg,
     date: '2024'
   }
@@ -77,8 +71,8 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Link key={index} to={`/project/${project.id}`} className='group cursor-pointer'>
               <img
-                src={project.firstImage}
-                className={`aspect-[3/4] bg-gradient-to-br ${project.gradient} mb-4 transition-opacity duration-300 group-hover:opacity-80 object-cover`}
+                src={project.firstImage ? project.firstImage : heroImg}
+                className={`aspect-[3/4] mb-4 transition-opacity duration-300 group-hover:opacity-80 object-cover`}
               />
 
               <h3 className='text-lg font-light mb-2 group-hover:opacity-60 transition-opacity'>{project.title}</h3>

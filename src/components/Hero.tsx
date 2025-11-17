@@ -3,7 +3,7 @@ import heroImg from '@/assets/hero.jpg'
 
 const Hero = () => {
   return (
-    <section className='min-h-screen flex items-center justify-center px-4 py-20' style={{background: `linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(${heroImg})`, backgroundSize: 'cover'}}>
+    <section className='min-h-screen flex items-center justify-center px-4 py-20' style={{background: `linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${heroImg})`, backgroundSize: 'cover'}}>
       <div className='container mx-auto max-w-3xl text-center animate-fade-in'>
         <div className='mb-12'>
           <img src={logoRed} alt='Logo' className='w-20 h-20 mx-auto' />

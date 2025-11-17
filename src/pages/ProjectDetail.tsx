@@ -1,18 +1,20 @@
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import bokhyllanImg from '@/assets/bokhyllan.png'
 import galleriGoghImg from '@/assets/galleri_gogh.png'
 import wordbondImg from '@/assets/wordbond.png'
 import skiathosCatsImg from '@/assets/skiathos_cats.png'
 import decthingsImg from '@/assets/decthings.png'
 import apoceusImg from '@/assets/apoceus.jpeg'
+import logoRed from '@/assets/logo-red.png'
+import { useEffect } from 'react'
+import heroImg from '@/assets/hero.jpg'
 
 const projects = [
   {
     id: 0,
     title: 'Solving Pyssels',
     tags: ['Next.js', 'TypeScript', 'Tailwind'],
-    gradient: 'from-accent to-primary/60',
     projectImage: '',
     description:
       'Ongoing project. Me and a friend from school are building a platform where creative people can share their creations such as crocheting, drawings and DIY projects. More info coming soon!',
@@ -22,7 +24,6 @@ const projects = [
     id: 1,
     title: 'Bokhyllan webshop',
     tags: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Render', 'School project'],
-    gradient: 'from-primary to-primary/60',
     projectImage: bokhyllanImg,
     description:
       'This website features a homepage with recommended books, a full catalog with genre filters, individual book pages, and a shopping cart that calculates discounts such as “3 for 2.” The frontend handles cart functionality, including adding, removing, and grouping books, while the backend manages database requests and filtering. I generated all book covers using ChatGPT to avoid using real books and implemented a mobile-friendly design with a hamburger menu. This project gave me valuable experience in connecting frontend and backend systems, debugging, and structuring a full-stack application.',
@@ -32,7 +33,6 @@ const projects = [
     id: 2,
     title: 'WordBond',
     tags: ['Vue', 'School project'],
-    gradient: 'from-primary to-accent',
     projectImage: wordbondImg,
     description: '',
     date: '2025'
@@ -41,7 +41,6 @@ const projects = [
     id: 3,
     title: 'Galleri Gogh',
     tags: ['React', 'REST API', 'School project'],
-    gradient: 'from-accent to-accent/60',
     projectImage: galleriGoghImg,
     description:
       'Galleri Gogh is an art gallery website that showcases various artworks fetched from the Met Museum REST API. The site features a clean and modern design, allowing users to browse through different art pieces and view detailed information about each artwork. This project helped me enhance my skills in working with APIs, managing state in React, and creating visually appealing layouts.',
@@ -51,7 +50,6 @@ const projects = [
     id: 4,
     title: 'Skiathos Cat Shelter',
     tags: ['JavaScript', 'REST API', 'School project'],
-    gradient: 'from-accent to-primary',
     projectImage: skiathosCatsImg,
     description: '',
     date: '2024'
@@ -60,7 +58,6 @@ const projects = [
     id: 5,
     title: 'Decthings',
     tags: ['Web design', 'Figma'],
-    gradient: 'from-accent to-accent/60',
     projectImage: decthingsImg,
     description: '',
     date: '2024'
@@ -69,7 +66,6 @@ const projects = [
     id: 6,
     title: 'Apoceus',
     tags: ['Web design', 'Figma'],
-    gradient: 'from-accent to-accent/60',
     projectImage: apoceusImg,
     description: '',
     date: '2024'
@@ -82,6 +78,10 @@ const ProjectDetail = () => {
   const projectId = parseInt(id || '0')
   const project = projects[projectId]
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   if (!project) {
     navigate('/')
     return null
@@ -92,23 +92,29 @@ const ProjectDetail = () => {
 
   return (
     <div className='min-h-screen bg-background relative'>
-      <div className='absolute top-8 right-8 z-50 flex gap-6'>
+      <div className='absolute top-10 left-10 z-50 flex gap-6'>
         <Link to='/' className='text-primary hover:opacity-60 transition-opacity'>
-          <X size={40} strokeWidth={1.5} />
+          <img src={logoRed} alt='Logo' className='w-16 h-16 mx-auto' />
         </Link>
       </div>
 
-      <div className='container mx-auto max-w-6xl px-4 py-16 flex justify-between items-center gap-32'>
-        <Link to={`/project/${prevId}`} className='text-primary hover:opacity-60 transition-opacity'>
-          <ChevronLeft size={40} strokeWidth={1.5} />
-        </Link>
+      <div className='container mx-auto max-w-4xl px-4 py-16'>
+        <div className='flex justify-between m-10'>
+          <Link to={`/project/${prevId}`} className='text-primary hover:opacity-60 transition-opacity'>
+            <ChevronLeft size={40} strokeWidth={1.5} />
+          </Link>
+          <div>
+            <h1 className='text-3xl md:text-3xl font-light tracking-tight uppercase text-center mb-3'>{project.title}</h1>
+            <p className='text-sm text-muted-foreground uppercase tracking-wider text-center'>{project.date}</p>
+          </div>
+          <Link to={`/project/${nextId}`} className='text-primary hover:opacity-60 transition-opacity'>
+            <ChevronRight size={40} strokeWidth={1.5} />
+          </Link>
+        </div>
         <div className='grid md:grid-cols-1 gap-8 md:gap-12 items-center min-h-[80vh]'>
           <div className='flex flex-col justify-center space-y-6'>
-            <h1 className='text-3xl md:text-3xl font-light tracking-tight uppercase'>{project.title}</h1>
 
-            <p className='text-sm text-muted-foreground uppercase tracking-wider'>{project.date}</p>
-
-            <p className='text-foreground/80 leading-relaxed text-sm'>{project.description}</p>
+            <p className='text-foreground/80 leading-relaxed text-sm leading-7'>{project.description}</p>
 
             <div className='flex flex-wrap gap-2 text-xs text-muted-foreground pt-4 border-t-2 border-secondary'>
               {project.tags.map((tag, tagIndex) => (
@@ -119,11 +125,8 @@ const ProjectDetail = () => {
               ))}
             </div>
           </div>
-          <img src={project.projectImage} className={`bg-gradient-to-br ${project.gradient} rounded-lg object-cover`} />
+          <img src={project.projectImage ? project.projectImage : heroImg} className={'rounded-lg object-cover'} />
         </div>
-        <Link to={`/project/${nextId}`} className='text-primary hover:opacity-60 transition-opacity'>
-          <ChevronRight size={40} strokeWidth={1.5} />
-        </Link>
       </div>
     </div>
   )
