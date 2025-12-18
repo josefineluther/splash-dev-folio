@@ -1,64 +1,6 @@
 import { Link } from 'react-router-dom'
-import womanReadingImg from '@/assets/woman_reading.jpg'
-import galleryImg from '@/assets/gallery.jpg'
-import languagesImg from '@/assets/languages.jpg'
-import catImg from '@/assets/cat.jpg'
-import microcontrollerImg from '@/assets/microcontroller.jpg'
-import craftingImg from '@/assets/crafting.jpg'
-import snowImg from '@/assets/snow.jpg'
 import heroImg from '@/assets/hero.jpg'
-
-const projects = [
-  {
-    id: 0,
-    title: 'Solving Pyssels',
-    tags: ['Next.js', 'TypeScript', 'Tailwind'],
-    firstImage: craftingImg,
-    date: '2025-'
-  },
-  {
-    id: 1,
-    title: 'Bokhyllan webshop',
-    tags: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Render', 'School project'],
-    firstImage: womanReadingImg,
-    date: '2025'
-  },
-  {
-    id: 2,
-    title: 'WordBond',
-    tags: ['Vue', 'School project'],
-    firstImage: languagesImg,
-    date: '2025'
-  },
-  {
-    id: 3,
-    title: 'Galleri Gogh',
-    tags: ['React', 'REST API', 'School project'],
-    firstImage: galleryImg,
-    date: '2025'
-  },
-  {
-    id: 4,
-    title: 'Skiathos Cat Shelter',
-    tags: ['JavaScript', 'REST API', 'School project'],
-    firstImage: catImg,
-    date: '2024'
-  },
-  {
-    id: 5,
-    title: 'Decthings',
-    tags: ['Web design', 'Figma'],
-    firstImage: microcontrollerImg,
-    date: '2024'
-  },
-  {
-    id: 6,
-    title: 'Apoceus',
-    tags: ['Web design', 'Figma'],
-    firstImage: snowImg,
-    date: '2024'
-  }
-]
+import { projects } from '@/data/projects'
 
 const Projects = () => {
   return (
@@ -68,25 +10,28 @@ const Projects = () => {
         <p className='text-muted-foreground mb-16 font-light'>Click on project to read more.</p>
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-          {projects.map((project, index) => (
-            <Link key={index} to={`/project/${project.id}`} className='group cursor-pointer'>
-              <img
-                src={project.firstImage ? project.firstImage : heroImg}
-                className={`aspect-[3/4] mb-4 transition-opacity duration-300 group-hover:opacity-80 object-cover`}
-              />
+          {projects
+            .slice()
+            .reverse()
+            .map((project, index) => (
+              <Link key={index} to={`/project/${project.id}`} className='group cursor-pointer'>
+                <img
+                  src={project.firstImage ? project.firstImage : heroImg}
+                  className={`aspect-[3/4] mb-4 transition-opacity duration-300 group-hover:opacity-80 object-cover`}
+                />
 
-              <h3 className='text-lg font-light mb-2 group-hover:opacity-60 transition-opacity'>{project.title}</h3>
+                <h3 className='text-lg font-light mb-2 group-hover:opacity-60 transition-opacity'>{project.title}</h3>
 
-              <div className='flex flex-wrap gap-2 text-xs text-muted-foreground'>
-                {project.tags.map((tag, tagIndex) => (
-                  <span key={tagIndex}>
-                    {tag}
-                    {tagIndex < project.tags.length - 1 ? ' /' : ''}
-                  </span>
-                ))}
-              </div>
-            </Link>
-          ))}
+                <div className='flex flex-wrap gap-2 text-xs text-muted-foreground'>
+                  {project.tags.map((tag, tagIndex) => (
+                    <span key={tagIndex}>
+                      {tag}
+                      {tagIndex < project.tags.length - 1 ? ' /' : ''}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            ))}
         </div>
       </div>
     </section>

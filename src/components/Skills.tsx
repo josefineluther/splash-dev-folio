@@ -18,6 +18,10 @@ const skills = [
     name: 'TYPESCRIPT'
   },
   {
+    icon: <Code2 size={28} strokeWidth={1.5} />,
+    name: 'PHP'
+  },
+  {
     icon: <Palette size={28} strokeWidth={1.5} />,
     name: 'TAILWIND CSS'
   },
@@ -27,7 +31,11 @@ const skills = [
   },
   {
     icon: <Smartphone size={28} strokeWidth={1.5} />,
-    name: 'RESPONSIVE'
+    name: 'UX'
+  },
+  {
+    icon: <Palette size={28} strokeWidth={1.5} />,
+    name: 'CMS'
   },
   {
     icon: <GitBranch size={28} strokeWidth={1.5} />,
