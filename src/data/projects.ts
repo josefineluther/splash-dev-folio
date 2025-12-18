@@ -13,6 +13,7 @@ import bokhyllanImg from '@/assets/bokhyllan.png'
 import craftingImg from '@/assets/crafting.jpg'
 import meetingBookingImg from '@/assets/meetingbooking.png'
 import gymImg from '@/assets/gym.jpg'
+import meetingRoomImg from '@/assets/meeting_room.jpg'
 
 export interface Project {
   id: number
@@ -107,7 +108,7 @@ export const projects: Project[] = [
     id: 7,
     title: 'Mötesbokning',
     tags: ['PHP', 'School project'],
-    firstImage: '',
+    firstImage: meetingRoomImg,
     projectImage: meetingBookingImg,
     description: 'Project in school.',
     github: 'https://github.com/josefineluther/meetingbooking',
