@@ -63,7 +63,7 @@ const ProjectDetail = () => {
               ))}
             </div>
           </div>
-          <img src={project.projectImage ? project.projectImage : heroImg} className={'rounded-lg object-cover'} />
+          <img src={project.projectImage ? project.projectImage : heroImg} className={'rounded-lg object-cover mb-10'} />
         </div>
       </div>
     </div>
