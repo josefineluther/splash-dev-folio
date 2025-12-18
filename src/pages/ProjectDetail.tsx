@@ -25,26 +25,26 @@ const ProjectDetail = () => {
 
   return (
     <div className='min-h-screen bg-background relative'>
-      <div className='absolute top-10 left-10 z-50 flex gap-6'>
+      <div className='flex justify-start mt-5 ml-5 md:mt-10 md:ml-10'>
         <Link to='/' className='text-primary hover:opacity-60 transition-opacity'>
-          <img src={logoRed} alt='Logo' className='w-16 h-16 mx-auto' />
+          <img src={logoRed} alt='Logo' className='w-11 h-11 md:w-16 md:h-16 mx-auto' />
         </Link>
       </div>
 
-      <div className='container mx-auto max-w-4xl px-4 py-16'>
-        <div className='flex justify-between m-10'>
+      <div className='container mx-auto max-w-4xl px-4 mt-5'>
+        <div className='flex justify-between items-center m-2'>
           <Link to={`/project/${prevId}`} className='text-primary hover:opacity-60 transition-opacity'>
             <ChevronLeft size={40} strokeWidth={1.5} />
           </Link>
           <div>
-            <h1 className='text-3xl md:text-3xl font-light tracking-tight uppercase text-center mb-3'>{project.title}</h1>
-            <p className='text-sm text-muted-foreground uppercase tracking-wider text-center'>{project.date}</p>
+            <h1 className='text-xl md:text-3xl font-light tracking-tight uppercase text-center'>{project.title}</h1>
           </div>
           <Link to={`/project/${nextId}`} className='text-primary hover:opacity-60 transition-opacity'>
             <ChevronRight size={40} strokeWidth={1.5} />
           </Link>
         </div>
-        <div className='grid md:grid-cols-1 gap-8 md:gap-12 items-center min-h-[80vh]'>
+        <p className='text-sm text-muted-foreground uppercase tracking-wider text-center mb-5'>{project.date}</p>
+        <div className='grid md:grid-cols-1 gap-8 md:gap-12 items-center'>
           <div className='flex flex-col justify-center space-y-6'>
             <p className='text-foreground/80 leading-relaxed text-sm leading-7'>{project.description}</p>
 

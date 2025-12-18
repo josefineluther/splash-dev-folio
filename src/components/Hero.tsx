@@ -11,13 +11,13 @@ const Hero = () => {
       }}
     >
       <div className='container mx-auto max-w-3xl text-center animate-fade-in'>
-        <div className='mb-12'>
-          <img src={logoRed} alt='Logo' className='w-20 h-20 mx-auto' />
+        <div className='mb-6 md:mb-12'>
+          <img src={logoRed} alt='Logo' className='w-16 h-16 md:w-20 md:h-20 mx-auto' />
         </div>
 
-        <h1 className='text-4xl md:text-6xl font-light mb-8 leading-tight tracking-tight'>JOSEFINE LUTHER</h1>
+        <h1 className='text-3xl md:text-6xl font-light mb-4 md:mb-8 leading-tight tracking-tight'>JOSEFINE LUTHER</h1>
 
-        <p className='text-lg md:text-xl text-muted-foreground mb-12 font-light max-w-2xl mx-auto'>Frontend developer</p>
+        <p className='text-lg md:text-xl text-muted-foreground mb-6 md:mb-12 font-light max-w-2xl mx-auto'>Frontend developer</p>
 
         <div className='flex gap-6 justify-center'>
           <a href='#projects' className='text-sm tracking-wider hover:opacity-60 transition-opacity border-b-2 border-secondary pb-1'>

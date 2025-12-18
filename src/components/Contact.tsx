@@ -15,9 +15,9 @@ const socialLinks = [
 
 const Contact = () => {
   return (
-    <section id='contact' className='py-32 px-4'>
+    <section id='contact' className='py-20 md:py-32 px-4'>
       <div className='container mx-auto max-w-5xl'>
-        <h2 className='text-3xl md:text-4xl font-light mb-16 tracking-tight'>CONTACT</h2>
+        <h2 className='text-2xl md:text-4xl font-light mb-6 md:mb-16 tracking-tight'>CONTACT</h2>
 
         <div className='grid md:grid-cols-2 gap-12'>
           <div className='space-y-6 font-light'>
