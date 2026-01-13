@@ -14,6 +14,7 @@ import craftingImg from '@/assets/crafting.jpg'
 import meetingBookingImg from '@/assets/meetingbooking.png'
 import gymImg from '@/assets/gym.jpg'
 import meetingRoomImg from '@/assets/meeting_room.jpg'
+import unityFitnessImg from '@/assets/unity_fitness.png'
 
 export interface Project {
   id: number
@@ -117,9 +118,9 @@ export const projects: Project[] = [
   {
     id: 8,
     title: 'Unity Fitness',
-    tags: ['React', 'Strapi', 'School project'],
+    tags: ['React', 'Strapi', 'GraphQL', 'School project'],
     firstImage: gymImg,
-    projectImage: '',
+    projectImage: unityFitnessImg,
     description: 'Ongoing group project in school.',
     github: 'https://github.com/josefineluther/unity-fitness',
     date: '2025'
