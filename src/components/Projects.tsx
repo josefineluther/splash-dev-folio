@@ -15,13 +15,14 @@ const Projects = () => {
             .reverse()
             .map((project, index) => (
               <Link key={index} to={`/project/${project.id}`} className='group cursor-pointer'>
-                <img
-                  src={project.firstImage ? project.firstImage : heroImg}
-                  className={`aspect-[1/1] md:aspect-[3/4] mb-3 md:mb-4 transition-opacity duration-300 group-hover:opacity-80 object-cover`}
-                />
-
+                <div className='aspect-[1/1] md:aspect-[3/4] mb-3 md:mb-4 overflow-hidden'>
+                  <img
+                    src={project.firstImage ? project.firstImage : heroImg}
+                    className='w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80'
+                    alt={project.title}
+                  />
+                </div>
                 <h3 className='text-lg font-light mb-2 group-hover:opacity-60 transition-opacity'>{project.title}</h3>
-
                 <div className='flex flex-wrap gap-2 text-xs text-muted-foreground mb-3 md:mb-1'>
                   {project.tags.map((tag, tagIndex) => (
                     <span key={tagIndex}>
