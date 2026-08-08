@@ -73,7 +73,19 @@ const ProjectDetail = () => {
         </motion.p>
 
         <div className='grid md:grid-cols-1 gap-8 md:gap-12 items-center'>
-          <motion.div custom={direction} variants={contentItem} className='flex flex-col justify-center space-y-6'>
+          <motion.div custom={direction} variants={contentItem}>
+            <img
+              ref={imgRef}
+              key={project.projectImage}
+              src={project.projectImage ? project.projectImage : heroImg}
+              alt={project.title}
+              decoding='async'
+              onLoad={() => setImgLoaded(true)}
+              className={`rounded-lg object-cover transition-opacity duration-500 ease-out ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+            />
+          </motion.div>
+
+          <motion.div custom={direction} variants={contentItem} className='flex flex-col justify-center space-y-6 mb-10'>
             <p className='text-foreground/80 leading-relaxed text-sm leading-7'>{project.description}</p>
 
             {project.github && (
@@ -90,20 +102,6 @@ const ProjectDetail = () => {
                 </span>
               ))}
             </div>
-          </motion.div>
-
-          <motion.div custom={direction} variants={contentItem}>
-            <img
-              ref={imgRef}
-              key={project.projectImage}
-              src={project.projectImage ? project.projectImage : heroImg}
-              alt={project.title}
-              decoding='async'
-              onLoad={() => setImgLoaded(true)}
-              className={`rounded-lg object-cover mb-10 transition-opacity duration-500 ease-out ${
-                imgLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
           </motion.div>
         </div>
       </motion.div>

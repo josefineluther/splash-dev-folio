@@ -6,6 +6,8 @@ import womanReadingImg from '@/assets/woman_reading.jpg'
 import bokhyllanImg from '@/assets/bokhyllan.png'
 import gymImg from '@/assets/gym.jpg'
 import unityFitnessImg from '@/assets/unity_fitness.png'
+import groceriesImg from '@/assets/groceries.jpg'
+import bronteImg from '@/assets/bronte.png'
 
 export interface Project {
   id: number
@@ -63,5 +65,16 @@ export const projects: Project[] = [
     description: 'Ongoing group project in school.',
     github: 'https://github.com/josefineluther/unity-fitness',
     date: '2025'
+  },
+  {
+    id: 4,
+    title: 'Bronte',
+    tags: ['SvelteKit', 'TypeScript', 'PostgreSQL', 'AI SDK', 'Degree project'],
+    firstImage: groceriesImg,
+    projectImage: bronteImg,
+    description:
+      "Bronte is a tool that uses AI to generate product descriptions for the e-commerce wholesaler outofhome, built as my degree project. Products are imported and sent to a language model that either builds on data from the food database Dabas or searches external sources when that data is missing, returning a long description, a short one and the sources it used. The user can edit the prompts, and then edit, approve or ignore each generated text. I built it with SvelteKit and TypeScript, with a PostgreSQL database and the Vercel AI SDK for the model integration. It is published on Vercel and has since been integrated into outofhome's admin site, where it made writing around 100 product descriptions roughly ten times faster than before.",
+    github: '',
+    date: '2026'
   }
 ]
