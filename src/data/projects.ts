@@ -20,6 +20,12 @@ export interface Project {
   date: string
 }
 
+/** Taggar som beskriver vad slags projekt eller arbete det är, inte vad det är byggt med. */
+const PROJECT_TYPE_TAGS = ['School project', 'Degree project', 'Web design']
+
+/** Bara de tekniska taggarna — används i "Built with" på projektsidan. */
+export const techTags = (project: Project) => project.tags.filter(tag => !PROJECT_TYPE_TAGS.includes(tag))
+
 // id måste vara sammanhängande och matcha arrayindex — ProjectDetail slår upp
 // projekt med projects[id] och pilarna stegar med id ± 1.
 export const projects: Project[] = [

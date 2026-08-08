@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import logoRed from '@/assets/logo-red.webp'
 import heroImg from '@/assets/hero.webp'
-import { projects } from '@/data/projects'
+import { projects, techTags } from '@/data/projects'
 import PageTransition from '@/components/PageTransition'
 import { contentContainer, contentItem, getDirection } from '@/lib/motion'
 
@@ -35,6 +35,7 @@ const ProjectDetail = () => {
 
   const nextId = projectId > 0 ? projectId - 1 : projects.length - 1
   const prevId = projectId < projects.length - 1 ? projectId + 1 : 0
+  const builtWith = techTags(project)
 
   return (
     <PageTransition className='bg-background relative'>
@@ -97,16 +98,18 @@ const ProjectDetail = () => {
               <p className='text-sm text-foreground/80'>{project.date}</p>
             </div>
 
-            <div className='space-y-3'>
-              <h2 className={labelClasses}>Built with</h2>
-              <ul>
-                {project.tags.map((tag, tagIndex) => (
-                  <li key={tagIndex} className='text-sm text-foreground/80 border-t border-border py-2 last:pb-0'>
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {builtWith.length > 0 && (
+              <div className='space-y-3'>
+                <h2 className={labelClasses}>Built with</h2>
+                <ul>
+                  {builtWith.map((tag, tagIndex) => (
+                    <li key={tagIndex} className='text-sm text-foreground/80 border-t border-border py-2 last:pb-0'>
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {project.github && (
               <div className='space-y-3'>
