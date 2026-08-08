@@ -50,5 +50,23 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+
+    /* Projektsvepet förskjuter innehållet i sidled och skulle annars blinka fram
+       en horisontell scrollbar. `clip` skapar ingen scrollkontainer, till skillnad
+       från `hidden` — den senare står kvar som fallback för äldre Safari. */
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+
+  /* Mjuk scroll för ankarlänkarna i hero (#projects, #contact).
+     Programmatisk scroll måste därför använda behavior: 'instant' — se PageTransition. */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }

@@ -18,7 +18,8 @@ const Projects = () => {
                 <div className='aspect-[1/1] md:aspect-[3/4] mb-3 md:mb-4 overflow-hidden'>
                   <img
                     src={project.firstImage ? project.firstImage : heroImg}
-                    className='w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-80'
+                    loading='lazy'
+                    className='w-full h-full object-cover transition-[transform,opacity] duration-500 ease-out group-hover:scale-[1.03] group-hover:opacity-90 motion-reduce:transform-none motion-reduce:transition-none'
                     alt={project.title}
                   />
                 </div>

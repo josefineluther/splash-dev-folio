@@ -1,5 +1,6 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import PageTransition from "@/components/PageTransition";
 
 const NotFound = () => {
   const location = useLocation();
@@ -9,15 +10,15 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/30">
+    <PageTransition className="flex items-center justify-center bg-muted/30">
       <div className="text-center">
         <h1 className="mb-4 text-4xl font-bold">404</h1>
         <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <a href="/" className="text-gray-700 underline hover:text-gray-500">
+        <Link to="/" className="text-gray-700 underline hover:text-gray-500">
           Return to Home
-        </a>
+        </Link>
       </div>
-    </div>
+    </PageTransition>
   );
 };
 
