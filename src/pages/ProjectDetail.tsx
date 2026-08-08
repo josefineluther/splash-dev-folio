@@ -11,6 +11,9 @@ import { contentContainer, contentItem, getDirection } from '@/lib/motion'
 const arrowClasses =
   'text-primary inline-flex shrink-0 transition-[opacity,transform] duration-300 ease-out hover:opacity-60 motion-reduce:transform-none'
 
+/** Små sektionsetiketter i textblocket, i sidans befintliga formspråk. */
+const labelClasses = 'text-xs uppercase tracking-wider text-muted-foreground'
+
 const ProjectDetail = () => {
   const { id } = useParams()
   const location = useLocation()
@@ -52,7 +55,7 @@ const ProjectDetail = () => {
         initial='hidden'
         animate='show'
         exit='exit'
-        className='container mx-auto max-w-4xl px-4 mt-5'
+        className='container mx-auto max-w-5xl px-4 mt-5'
       >
         {/* Pilarna ligger UTANFÖR de svepande blocken — de är navigering, inte
             innehåll, och ska stå still medan projektet sveper förbi. */}
@@ -68,40 +71,56 @@ const ProjectDetail = () => {
           </Link>
         </div>
 
-        <motion.p custom={direction} variants={contentItem} className='text-sm text-muted-foreground uppercase tracking-wider text-center mb-5'>
-          {project.date}
-        </motion.p>
+        {/* Bilden i full bredd direkt under rubriken, som på referenslayouten. */}
+        <motion.div custom={direction} variants={contentItem} className='mt-6 md:mt-10'>
+          <img
+            ref={imgRef}
+            key={project.projectImage}
+            src={project.projectImage ? project.projectImage : heroImg}
+            alt={project.title}
+            decoding='async'
+            onLoad={() => setImgLoaded(true)}
+            className={`w-full rounded-lg object-cover transition-opacity duration-500 ease-out ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+          />
+        </motion.div>
 
-        <div className='grid md:grid-cols-1 gap-8 md:gap-12 items-center'>
-          <motion.div custom={direction} variants={contentItem}>
-            <img
-              ref={imgRef}
-              key={project.projectImage}
-              src={project.projectImage ? project.projectImage : heroImg}
-              alt={project.title}
-              decoding='async'
-              onLoad={() => setImgLoaded(true)}
-              className={`rounded-lg object-cover transition-opacity duration-500 ease-out ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
-            />
+        {/* Textblocket under bilden: bred kolumn för beskrivningen, smal för metadata. */}
+        <div className='grid md:grid-cols-3 gap-10 md:gap-12 mt-10 md:mt-16 pb-20'>
+          <motion.div custom={direction} variants={contentItem} className='md:col-span-2 space-y-4'>
+            <h2 className={labelClasses}>About the project</h2>
+            <p className='text-foreground/80 text-sm leading-7'>{project.description}</p>
           </motion.div>
 
-          <motion.div custom={direction} variants={contentItem} className='flex flex-col justify-center space-y-6 mb-10'>
-            <p className='text-foreground/80 leading-relaxed text-sm leading-7'>{project.description}</p>
+          <motion.div custom={direction} variants={contentItem} className='space-y-8'>
+            <div className='space-y-3'>
+              <h2 className={labelClasses}>Year</h2>
+              <p className='text-sm text-foreground/80'>{project.date}</p>
+            </div>
+
+            <div className='space-y-3'>
+              <h2 className={labelClasses}>Built with</h2>
+              <ul>
+                {project.tags.map((tag, tagIndex) => (
+                  <li key={tagIndex} className='text-sm text-foreground/80 border-t border-border py-2 last:pb-0'>
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             {project.github && (
-              <a className='text-xs text-muted-foreground hover:opacity-60' href={project.github} target='_blank' rel='noreferrer'>
-                View on GitHub
-              </a>
+              <div className='space-y-3'>
+                <h2 className={labelClasses}>Links</h2>
+                <a
+                  className='inline-block text-sm text-foreground/80 border-b-2 border-secondary pb-1 hover:opacity-60 transition-opacity'
+                  href={project.github}
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  View on GitHub
+                </a>
+              </div>
             )}
-
-            <div className='flex flex-wrap gap-2 text-xs text-muted-foreground pt-4 border-t-2 border-secondary'>
-              {project.tags.map((tag, tagIndex) => (
-                <span key={tagIndex}>
-                  {tag}
-                  {tagIndex < project.tags.length - 1 ? ' /' : ''}
-                </span>
-              ))}
-            </div>
           </motion.div>
         </div>
       </motion.div>

@@ -62,7 +62,8 @@ export const projects: Project[] = [
     tags: ['React', 'Strapi', 'GraphQL', 'School project'],
     firstImage: gymImg,
     projectImage: unityFitnessImg,
-    description: 'Ongoing group project in school.',
+    description:
+      'A group project in school where we built a website for booking gym classes. We connected it to the headless CMS Strapi, so classes can be uploaded and edited there without touching the code. The site is built with React and TypeScript.',
     github: 'https://github.com/josefineluther/unity-fitness',
     date: '2025'
   },
@@ -74,7 +75,7 @@ export const projects: Project[] = [
     projectImage: bronteImg,
     description:
       "Bronte is a tool that uses AI to generate product descriptions for the e-commerce wholesaler outofhome, built as my degree project. Products are imported and sent to a language model that either builds on data from the food database Dabas or searches external sources when that data is missing, returning a long description, a short one and the sources it used. The user can edit the prompts, and then edit, approve or ignore each generated text. I built it with SvelteKit and TypeScript, with a PostgreSQL database and the Vercel AI SDK for the model integration. It is published on Vercel and has since been integrated into outofhome's admin site, where it made writing around 100 product descriptions roughly ten times faster than before.",
-    github: '',
+    github: 'https://github.com/josefineluther/bronte',
     date: '2026'
   }
 ]
