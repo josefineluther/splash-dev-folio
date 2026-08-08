@@ -1,5 +1,5 @@
-import logoRed from '@/assets/logo-red.png'
-import heroImg from '@/assets/hero.jpg'
+import logoRed from '@/assets/logo-red.webp'
+import heroImg from '@/assets/hero.webp'
 
 const Hero = () => {
   return (

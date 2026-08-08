@@ -1,13 +1,13 @@
-import microcontrollerImg from '@/assets/microcontroller.jpg'
-import decthingsImg from '@/assets/decthings.png'
-import catImg from '@/assets/cat.jpg'
-import skiathosCatsImg from '@/assets/skiathos_cats.png'
-import womanReadingImg from '@/assets/woman_reading.jpg'
-import bokhyllanImg from '@/assets/bokhyllan.png'
-import gymImg from '@/assets/gym.jpg'
-import unityFitnessImg from '@/assets/unity_fitness.png'
-import groceriesImg from '@/assets/groceries.jpg'
-import bronteImg from '@/assets/bronte.png'
+import microcontrollerImg from '@/assets/microcontroller.webp'
+import decthingsImg from '@/assets/decthings.webp'
+import catImg from '@/assets/cat.webp'
+import skiathosCatsImg from '@/assets/skiathos_cats.webp'
+import womanReadingImg from '@/assets/woman_reading.webp'
+import bokhyllanImg from '@/assets/bokhyllan.webp'
+import gymImg from '@/assets/gym.webp'
+import unityFitnessImg from '@/assets/unity_fitness.webp'
+import groceriesImg from '@/assets/groceries.webp'
+import bronteImg from '@/assets/bronte.webp'
 
 export interface Project {
   id: number
