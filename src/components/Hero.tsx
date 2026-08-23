@@ -27,11 +27,16 @@ const below = {
  * En hel skärm, ingen bild, ingen ram. Utställningen öppnar med väggtext —
  * och färgen kommer först när det första verket rullar in.
  *
- * Namnet sätts i vw så att den längsta raden når högermarginalen på varje
- * skärmbredd. Det är en affisch, inte en rubrik.
+ * Namnet fyller textytans bredd på varje skärmbredd; det är en affisch, inte
+ * en rubrik. Namn och bildtext hålls samman som ett block och centreras i
+ * vyporten, i stället för att tryckas mot över- och underkant — det lämnade
+ * annars ett hål på ett par hundra pixlar mitt i heron.
  */
 const Hero = () => (
-  <section id='top' className='flex min-h-screen flex-col justify-between px-6 pb-10 pt-24 md:px-10 md:pb-14'>
+  /* Asymmetrisk padding med avsikt: navigeringen ligger absolut ovanpå heron,
+     så en symmetrisk py hade lämnat 63 px luft över namnet mot 182 px under.
+     Den extra toppaddingen skjuter blocket ner så att luften väger jämnt. */
+  <section id='top' className='flex min-h-screen flex-col justify-center px-6 pb-20 pt-40 md:px-10 md:pb-24 md:pt-52'>
     <div className='name-fit'>
       <motion.h1
         variants={name}
@@ -59,11 +64,19 @@ const Hero = () => (
       variants={below}
       initial='hidden'
       animate='show'
-      className='flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-16'
+      className='mt-10 flex flex-col gap-8 md:mt-14 md:flex-row md:items-baseline md:justify-between md:gap-16'
     >
-      <div className='label space-y-1 text-ink-soft'>
-        <p>Based in Gothenburg</p>
-        <ul className='flex flex-wrap gap-x-6 gap-y-2'>
+      {/* Två rader, så att meningen väger jämnt mot etiketten och länkarna som
+          också är två. "end to end" hålls samman — ett fast mått bröt efter
+          "with a", och text-balance ensamt delade mitt i uttrycket. Med frasen
+          bunden faller brytningen vid kommat, där den hör. */}
+      <p className='max-w-[38ch] text-balance text-lead'>
+        I build applications <span className='whitespace-nowrap'>end to end</span>, with a focus on usability.
+      </p>
+
+      <div className='label space-y-2 text-ink-soft md:text-right'>
+        <p>Fullstack developer, Gothenburg</p>
+        <ul className='flex flex-wrap gap-x-6 gap-y-2 md:justify-end'>
           {links.map(link => (
             <li key={link.label}>
               <a
@@ -76,13 +89,6 @@ const Hero = () => (
             </li>
           ))}
         </ul>
-      </div>
-
-      <div className='max-w-measure space-y-5'>
-        <p className='text-lead'>
-          Fullstack developer with a background in design and communication. I build applications end to end, with a
-          focus on usability.
-        </p>
       </div>
     </motion.div>
   </section>
