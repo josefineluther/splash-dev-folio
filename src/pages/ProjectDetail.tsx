@@ -5,6 +5,7 @@ import { projects, findProject } from '@/data/projects'
 import PageTransition from '@/components/PageTransition'
 import ImageFrame from '@/components/ImageFrame'
 import { contentContainer, contentItem, getDirection } from '@/lib/motion'
+import { useDocumentTitle } from '@/lib/title'
 
 /**
  * En katalogpost: rubriken med årtalet överst, verket i full bredd under den,
@@ -16,6 +17,8 @@ const ProjectDetail = () => {
   const location = useLocation()
   const { project, index } = findProject(slug)
   const direction = getDirection(location.state)
+
+  useDocumentTitle(project?.title, project?.caption)
 
   if (!project) return <Navigate to='/' replace />
 
@@ -39,7 +42,7 @@ const ProjectDetail = () => {
           sättas explicit här — utan den ärvs ingen exit-label alls och den gamla
           sidan skulle försvinna direkt istället för att svepa ut. Barnen sätter
           ingen egen animate och ärver därför exit-labeln härifrån. */}
-      <motion.div custom={direction} variants={contentContainer} initial='hidden' animate='show' exit='exit' className='flex-1'>
+      <motion.main custom={direction} variants={contentContainer} initial='hidden' animate='show' exit='exit' className='flex-1'>
         <motion.header
           custom={direction}
           variants={contentItem}
@@ -87,7 +90,7 @@ const ProjectDetail = () => {
             <p className='max-w-measure text-body text-ink-soft'>{project.description}</p>
           </motion.div>
         </div>
-      </motion.div>
+      </motion.main>
 
       {/* Pilarna ligger UTANFÖR de svepande blocken — de är navigering, inte
           innehåll, och ska stå still medan verket sveper förbi. */}

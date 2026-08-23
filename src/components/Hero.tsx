@@ -38,7 +38,11 @@ const Hero = () => (
      Den extra toppaddingen skjuter blocket ner så att luften väger jämnt. */
   <section id='top' className='flex min-h-screen flex-col justify-center px-6 pb-20 pt-40 md:px-10 md:pb-24 md:pt-52'>
     <div className='name-fit'>
+      {/* aria-label sätter det tillgängliga namnet: raderna ligger i separata
+          block för maskavslöjandet, så texten läses annars som "JosefineLuther"
+          i ett ord. */}
       <motion.h1
+        aria-label='Josefine Luther'
         variants={name}
         initial='hidden'
         animate='show'

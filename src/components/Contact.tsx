@@ -12,7 +12,7 @@ const links = [
 const Contact = () => (
   <section id='contact' className='scroll-mt-20 border-t border-hairline px-6 py-24 md:px-10 md:py-32'>
     <Reveal>
-      <p className='label text-ink-soft'>Contact</p>
+      <h2 className='label text-ink-soft'>Contact</h2>
       <a
         href='mailto:josefineluther@hotmail.se'
         className='link-underline mt-6 inline-block break-words font-display text-contact font-bold'

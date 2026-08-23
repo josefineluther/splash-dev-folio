@@ -11,9 +11,11 @@ const Index = () => (
       <Nav />
       <Hero />
     </div>
-    <Projects />
-    <About />
-    <Contact />
+    <main>
+      <Projects />
+      <About />
+      <Contact />
+    </main>
   </PageTransition>
 )
 
