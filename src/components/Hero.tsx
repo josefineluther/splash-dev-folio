@@ -79,12 +79,9 @@ const Hero = () => (
       </div>
 
       <div className='max-w-measure space-y-5'>
-        {/* Samma tanke som i About — det tekniska mot det kommunikativa — men
-            i sidans konkreta röst istället för CV-språk, och med fullstack
-            uttalat. About behåller den längre formuleringen. */}
         <p className='text-lead'>
-          I build fullstack applications, from the data model to the interface. With a background in design and
-          communication, I give the surface as much care as the system under it.
+          Fullstack developer with a background in design and communication. I build applications end to end, with
+          usability at the centre.
         </p>
       </div>
     </motion.div>
