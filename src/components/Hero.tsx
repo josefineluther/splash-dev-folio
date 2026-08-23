@@ -80,8 +80,8 @@ const Hero = () => (
 
       <div className='max-w-measure space-y-5'>
         <p className='text-lead'>
-          Fullstack developer with a background in design and communication. I build applications end to end, with
-          usability at the centre.
+          Fullstack developer with a background in design and communication. I build applications end to end, with a
+          focus on usability.
         </p>
       </div>
     </motion.div>
