@@ -27,7 +27,7 @@ const ProjectDetail = () => {
     <PageTransition className='flex min-h-screen flex-col'>
       <div className='flex items-center justify-between px-6 py-6 md:px-10'>
         <Link to='/' aria-label='Josefine Luther, back to start'>
-          <img src={logoRed} alt='' className='h-8 w-8 brightness-0' />
+          <img src={logoRed} alt='' className='h-10 w-10 brightness-0 md:h-14 md:w-14' />
         </Link>
         <Link to='/' className='link-underline label'>
           All works

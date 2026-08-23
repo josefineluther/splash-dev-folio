@@ -18,7 +18,7 @@ const Nav = () => (
           extra fil behövs. Svart är också rätt här: sidans chrome ska vara
           helt utan färg, all kulör kommer från verken. */}
       <a href='#top' aria-label='Josefine Luther, to top'>
-        <img src={logoRed} alt='' className='h-8 w-8 brightness-0' />
+        <img src={logoRed} alt='' className='h-10 w-10 brightness-0 md:h-14 md:w-14' />
       </a>
 
       <ul className='flex items-center gap-6 md:gap-8'>
