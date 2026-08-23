@@ -63,13 +63,6 @@ const Hero = () => (
     >
       <div className='label space-y-1 text-ink-soft'>
         <p>Fullstack developer, Gothenburg</p>
-        <p className='text-ink'>Open to new work</p>
-      </div>
-
-      <div className='max-w-measure space-y-5'>
-        <p className='text-lead'>
-          I build web products end to end — the interface, the logic under it, and the data behind that.
-        </p>
         <ul className='flex flex-wrap gap-x-6 gap-y-2'>
           {links.map(link => (
             <li key={link.label}>
@@ -83,6 +76,16 @@ const Hero = () => (
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className='max-w-measure space-y-5'>
+        {/* Samma tanke som i About — det tekniska mot det kommunikativa — men
+            i sidans konkreta röst istället för CV-språk, och med fullstack
+            uttalat. About behåller den längre formuleringen. */}
+        <p className='text-lead'>
+          I build fullstack applications, from the data model to the interface. With a background in design and
+          communication, I give the surface as much care as the system under it.
+        </p>
       </div>
     </motion.div>
   </section>
