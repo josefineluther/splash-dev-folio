@@ -62,7 +62,7 @@ const Hero = () => (
       className='flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-16'
     >
       <div className='label space-y-1 text-ink-soft'>
-        <p>Fullstack developer, Gothenburg</p>
+        <p>Based in Gothenburg</p>
         <ul className='flex flex-wrap gap-x-6 gap-y-2'>
           {links.map(link => (
             <li key={link.label}>
