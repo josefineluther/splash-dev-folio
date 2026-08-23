@@ -10,9 +10,9 @@ const links = [
  * så adressen står stort och resten som etiketter.
  */
 const Contact = () => (
-  <section id='contact' className='scroll-mt-20 border-t border-hairline px-6 py-24 md:px-10 md:py-32'>
+  <section className='border-t border-hairline px-6 py-24 md:px-10 md:py-32'>
     <Reveal>
-      <h2 className='label text-ink-soft'>Contact</h2>
+      <h2 id='contact' className='label scroll-mt-24 text-ink-soft'>Contact</h2>
       <a
         href='mailto:josefineluther@hotmail.se'
         className='link-underline mt-6 inline-block break-words font-display text-contact font-bold'

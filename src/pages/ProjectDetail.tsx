@@ -32,7 +32,7 @@ const ProjectDetail = () => {
         <Link to='/' aria-label='Josefine Luther, back to start'>
           <img src={logoRed} alt='' className='h-10 w-10 brightness-0 md:h-14 md:w-14' />
         </Link>
-        <Link to='/' className='link-underline label'>
+        <Link to='/' state={{ scrollTo: 'works' }} className='link-underline label'>
           All works
         </Link>
       </div>

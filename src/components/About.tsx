@@ -13,9 +13,9 @@ const facts = [
  * sektionen bär sin egen tyngd utan ett porträtt.
  */
 const About = () => (
-  <section id='about' className='scroll-mt-20 px-6 py-24 md:px-10 md:py-40'>
+  <section className='px-6 py-24 md:px-10 md:py-40'>
     <Reveal>
-      <h2 className='font-display text-section font-semibold'>About</h2>
+      <h2 id='about' className='scroll-mt-24 font-display text-section font-semibold'>About</h2>
     </Reveal>
 
     <div className='mt-16 grid grid-cols-12 gap-6 md:mt-24'>
