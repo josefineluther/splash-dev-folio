@@ -1,13 +1,9 @@
-import { Code2, Palette, Zap, Smartphone, Database, GitBranch } from 'lucide-react'
+import { Code2, Palette, Zap, GitBranch, Sparkles, Terminal, Database, Figma, Triangle } from 'lucide-react'
 
 const skills = [
   {
     icon: <Code2 size={28} strokeWidth={1.5} />,
     name: 'REACT'
-  },
-  {
-    icon: <Code2 size={28} strokeWidth={1.5} />,
-    name: 'VUE'
   },
   {
     icon: <Code2 size={28} strokeWidth={1.5} />,
@@ -18,20 +14,28 @@ const skills = [
     name: 'TYPESCRIPT'
   },
   {
-    icon: <Code2 size={28} strokeWidth={1.5} />,
-    name: 'PHP'
+    icon: <Zap size={28} strokeWidth={1.5} />,
+    name: 'NEXT.JS'
+  },
+  {
+    icon: <Sparkles size={28} strokeWidth={1.5} />,
+    name: 'AI SDK'
+  },
+  {
+    icon: <Database size={28} strokeWidth={1.5} />,
+    name: 'POSTGRESQL'
+  },
+  {
+    icon: <Triangle size={28} strokeWidth={1.5} />,
+    name: 'VERCEL'
   },
   {
     icon: <Palette size={28} strokeWidth={1.5} />,
     name: 'TAILWIND'
   },
   {
-    icon: <Zap size={28} strokeWidth={1.5} />,
-    name: 'NEXT.JS'
-  },
-  {
-    icon: <Smartphone size={28} strokeWidth={1.5} />,
-    name: 'UX'
+    icon: <Figma size={28} strokeWidth={1.5} />,
+    name: 'FIGMA'
   },
   {
     icon: <Palette size={28} strokeWidth={1.5} />,
@@ -40,6 +44,10 @@ const skills = [
   {
     icon: <GitBranch size={28} strokeWidth={1.5} />,
     name: 'GIT'
+  },
+  {
+    icon: <Terminal size={28} strokeWidth={1.5} />,
+    name: 'CLAUDE CODE'
   }
 ]
 
