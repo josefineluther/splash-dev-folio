@@ -34,7 +34,6 @@ const Contact = () => (
 
       <div className='label space-y-1 text-ink-soft md:text-right'>
         <p>Dev &amp; design by Josefine Luther</p>
-        <p>Gothenburg, Sweden</p>
       </div>
     </Reveal>
   </section>
