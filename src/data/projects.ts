@@ -77,7 +77,7 @@ export const projects: Project[] = [
     context: 'IT-Högskolan',
     image: bokhyllanImg,
     description:
-      "This website features a homepage with recommended books, a full catalog with genre filters, individual book pages, and a shopping cart that calculates discounts such as '3 for 2.' The frontend handles cart functionality, including adding, removing, and grouping books, while the backend manages database requests and filtering. I generated all book covers using ChatGPT to avoid using real books and implemented a mobile-friendly design with a hamburger menu. This project gave me valuable experience in connecting frontend and backend systems, debugging, and structuring a full-stack application.",
+      "This website features a homepage with recommended books, a full catalog with genre filters, individual book pages, and a shopping cart that calculates discounts such as '3 for 2.' The frontend handles cart functionality, including adding, removing, and grouping books, while the backend manages database requests and filtering. I connected Stripe to handle payment, so an order can be taken all the way through checkout. I generated all book covers using ChatGPT to avoid using real books and implemented a mobile-friendly design with a hamburger menu. This project gave me valuable experience in connecting frontend and backend systems, debugging, and structuring a full-stack application.",
     github: 'https://github.com/josefineluther/bokhyllan'
   },
   {
