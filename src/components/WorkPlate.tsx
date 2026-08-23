@@ -17,12 +17,15 @@ const hangStyle = (start: number, span: number) => ({ '--hang': `${start} / span
 const WorkLabel = ({ project }: { project: Project }) => (
   <div className='space-y-5'>
     <div>
-      <h3 className='font-display text-work font-bold'>
+      {/* Luften under rubriken måste vara proportionell, inte fast: understryk-
+          ningen vid hover ligger 0.15em under texten, så på en rubrik som är
+          58 px hamnade en fast marginal på 12 px under linjen och de kolliderade. */}
+      <h3 className='font-display text-work font-bold pb-[0.32em]'>
         <Link to={`/project/${project.slug}`} className='link-underline'>
           {project.title}
         </Link>
       </h3>
-      <p className='label mt-3 text-ink-soft'>
+      <p className='label mt-2 text-ink-soft'>
         {project.kind}, {project.date}
       </p>
     </div>
