@@ -4,18 +4,6 @@ import bokhyllanImg from '@/assets/bokhyllan.webp'
 import unityFitnessImg from '@/assets/unity_fitness.webp'
 import bronteImg from '@/assets/bronte.webp'
 
-/**
- * Hängningens geometri på ett tolvkolumnsraster. Kolumnerna är handsatta per
- * verk, och plåtens storlek följer verkets tyngd: examensarbetet störst,
- * det minsta skolprojektet minst. Asymmetrin bär alltså information — det är
- * en hängning, inte slump.
- */
-interface Hang {
-  /** Startkolumn och bredd för plåten, 1–12. `bleed` spränger rastret helt. */
-  image: { start: number; span: number } | 'bleed'
-  label: { start: number; span: number }
-}
-
 export interface Project {
   /** Stabil identitet. Följer *inte* arrayindex — se kommentaren vid `projects`. */
   id: number
@@ -35,9 +23,6 @@ export interface Project {
   /** Etikettens sista rad: sammanhang eller proveniens. */
   context: string
   image: string
-  /** Plockad ur bildens egen gradient. Färgar väggen när verket är i vy. */
-  tint: string
-  hang: Hang
   /** Den långa texten, på verkets egen sida. */
   description: string
   github: string
@@ -63,8 +48,6 @@ export const projects: Project[] = [
     medium: 'SvelteKit, TypeScript, PostgreSQL, Vercel AI SDK',
     context: 'In production at outofhome',
     image: bronteImg,
-    tint: '#9A6BA8',
-    hang: { image: 'bleed', label: { start: 2, span: 6 } },
     description:
       "Bronte is a tool that uses AI to generate product descriptions for the e-commerce wholesaler outofhome, built as my degree project. Products are imported and sent to a language model that either builds on data from the food database Dabas or searches external sources when that data is missing, returning a long description, a short one and the sources it used. The user can edit the prompts, and then edit, approve or ignore each generated text. I built it with SvelteKit and TypeScript, with a PostgreSQL database and the Vercel AI SDK for the model integration. It is published on Vercel and has since been integrated into outofhome's admin site, where it made writing around 100 product descriptions roughly ten times faster than before.",
     github: 'https://github.com/josefineluther/bronte'
@@ -79,8 +62,6 @@ export const projects: Project[] = [
     medium: 'React, TypeScript, Strapi, GraphQL',
     context: 'IT-Högskolan',
     image: unityFitnessImg,
-    tint: '#F3B27E',
-    hang: { image: { start: 6, span: 7 }, label: { start: 1, span: 4 } },
     description:
       'A group project in school where we built a website for booking gym classes. We connected it to the headless CMS Strapi, so classes can be uploaded and edited there without touching the code. The site is built with React and TypeScript.',
     github: 'https://github.com/josefineluther/unity-fitness'
@@ -95,8 +76,6 @@ export const projects: Project[] = [
     medium: 'React, TypeScript, Express, PostgreSQL',
     context: 'IT-Högskolan',
     image: bokhyllanImg,
-    tint: '#5295B9',
-    hang: { image: { start: 1, span: 6 }, label: { start: 8, span: 4 } },
     description:
       "This website features a homepage with recommended books, a full catalog with genre filters, individual book pages, and a shopping cart that calculates discounts such as '3 for 2.' The frontend handles cart functionality, including adding, removing, and grouping books, while the backend manages database requests and filtering. I generated all book covers using ChatGPT to avoid using real books and implemented a mobile-friendly design with a hamburger menu. This project gave me valuable experience in connecting frontend and backend systems, debugging, and structuring a full-stack application.",
     github: 'https://github.com/josefineluther/bokhyllan'
@@ -111,8 +90,6 @@ export const projects: Project[] = [
     medium: 'JavaScript, REST API, Chart.js',
     context: 'IT-Högskolan',
     image: skiathosCatsImg,
-    tint: '#FD998D',
-    hang: { image: { start: 8, span: 5 }, label: { start: 3, span: 4 } },
     description:
       'I built an interactive website for a Greek cat shelter. Users can search for cat breeds through an external API, view results with images, and access detailed breed pages where the page title updates dynamically. I added logic to prevent outdated search results caused by API response delays. The site also includes a statistics page using Chart.js, where I visualized intelligence levels across selected breeds fetched via the API. The project combines structured HTML with JavaScript for API handling, dynamic rendering, and data visualization.',
     github: 'https://github.com/josefineluther/Skiathoscats'
@@ -129,8 +106,6 @@ export const projects: Project[] = [
     medium: 'Figma, Illustrator',
     context: 'Decthings',
     image: decthingsImg,
-    tint: '#878EAA',
-    hang: { image: { start: 2, span: 7 }, label: { start: 9, span: 4 } },
     description:
       'I designed the website for the startup company Decthings, along with their logo and graphical profile. I worked in Adobe Illustrator and Figma.',
     github: ''

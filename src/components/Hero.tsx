@@ -37,7 +37,7 @@ const Hero = () => (
         variants={name}
         initial='hidden'
         animate='show'
-        className='name-line font-display font-extrabold uppercase leading-none tracking-[-0.02em]'
+        className='name-line font-display font-bold uppercase leading-none tracking-[-0.02em]'
       >
       {/* Masken: overflow-hidden per rad, och lite luft under så att inte
           versalerna kapas av den snäva radhöjden. */}

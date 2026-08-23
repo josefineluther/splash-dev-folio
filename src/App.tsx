@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, MotionConfig } from 'framer-motion'
 import { getDirection } from '@/lib/motion'
+import AmbientGradient from '@/components/AmbientGradient'
 import Index from './pages/Index'
 import ProjectDetail from './pages/ProjectDetail'
 import NotFound from './pages/NotFound'
@@ -31,6 +32,9 @@ const AnimatedRoutes = () => {
 
 const App = () => (
   <MotionConfig reducedMotion='user'>
+    {/* Utanför AnimatePresence: annars monteras gradientlagret om vid varje
+        sidbyte och driften börjar om från noll. */}
+    <AmbientGradient />
     <BrowserRouter>
       <AnimatedRoutes />
     </BrowserRouter>

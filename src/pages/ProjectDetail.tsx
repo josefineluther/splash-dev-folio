@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useParams, useLocation, Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import logoRed from '@/assets/logo-red.webp'
@@ -6,17 +5,12 @@ import { projects, findProject } from '@/data/projects'
 import PageTransition from '@/components/PageTransition'
 import ImageFrame from '@/components/ImageFrame'
 import { contentContainer, contentItem, getDirection } from '@/lib/motion'
-import { useWallTint, resetWallTint } from '@/lib/wall'
 
 const ProjectDetail = () => {
   const { slug } = useParams()
   const location = useLocation()
   const { project, index } = findProject(slug)
   const direction = getDirection(location.state)
-
-  // Väggen tar verkets kulör så länge man står framför det.
-  useWallTint(project?.tint ?? '#B8B6B1', Boolean(project))
-  useEffect(() => resetWallTint, [])
 
   if (!project) return <Navigate to='/' replace />
 
@@ -41,9 +35,16 @@ const ProjectDetail = () => {
           sidan skulle försvinna direkt istället för att svepa ut. Barnen sätter
           ingen egen animate och ärver därför exit-labeln härifrån. */}
       <motion.div custom={direction} variants={contentContainer} initial='hidden' animate='show' exit='exit' className='flex-1'>
-        {/* Verket i full bredd, kant till kant. */}
-        <motion.div custom={direction} variants={contentItem}>
-          <ImageFrame src={project.image} alt={`${project.title} interface`} priority className='aspect-[16/9]' />
+        {/* Verket stort men inneslutet, i samma 4:3 som plåtarna på startsidan. */}
+        <motion.div custom={direction} variants={contentItem} className='grid grid-cols-12 gap-6 px-6 md:px-10'>
+          <div className='col-span-12 md:col-span-9'>
+            <ImageFrame
+              src={project.image}
+              alt={`${project.title} interface`}
+              priority
+              className='aspect-[4/3] rounded-plate'
+            />
+          </div>
         </motion.div>
 
         <div className='grid grid-cols-12 gap-6 px-6 pt-12 md:px-10 md:pt-20'>

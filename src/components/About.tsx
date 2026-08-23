@@ -1,9 +1,4 @@
-import { useRef } from 'react'
-import { useInView } from 'framer-motion'
-import josefineImg from '@/assets/josefine.webp'
-import ImageFrame from '@/components/ImageFrame'
 import Reveal from '@/components/Reveal'
-import { useWallTint, WALL } from '@/lib/wall'
 
 /** Verktygen bor här, en rad, istället för i en egen sektion. */
 const facts = [
@@ -13,52 +8,47 @@ const facts = [
   ['Works in', 'TypeScript, React, SvelteKit, Node, PostgreSQL, Figma']
 ]
 
-const About = () => {
-  const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { margin: '-35% 0px -35% 0px' })
+/**
+ * Ingen bild här. Ledtexten är satt stort som väggtext istället, så att
+ * sektionen bär sin egen tyngd utan ett porträtt.
+ */
+const About = () => (
+  <section id='about' className='scroll-mt-20 px-6 py-24 md:px-10 md:py-40'>
+    <Reveal>
+      <h2 className='font-display text-section font-semibold'>About</h2>
+    </Reveal>
 
-  // Väggen går tillbaka till neutralt grått här. Kulören hör till verken;
-  // utan detta skulle sista verkets färg följa med genom resten av sidan.
-  useWallTint(WALL, inView)
-
-  return (
-    <section ref={ref} id='about' className='scroll-mt-20 px-6 py-24 md:px-10 md:py-40'>
-      <Reveal>
-        <h2 className='font-display text-section font-semibold'>About</h2>
+    <div className='mt-16 grid grid-cols-12 gap-6 md:mt-24'>
+      <Reveal className='col-span-12 md:col-span-8'>
+        <p className='max-w-[46ch] text-walltext'>
+          Hi, I’m Josefine — a fullstack developer with a background in UI design and communication.
+        </p>
       </Reveal>
 
-      <div className='mt-16 grid grid-cols-12 gap-6 md:mt-24'>
-        <Reveal className='col-span-12 md:col-span-4'>
-          <ImageFrame src={josefineImg} alt='Josefine Luther' className='aspect-[4/5]' />
-        </Reveal>
+      <Reveal delay={0.1} className='col-span-12 md:col-span-5'>
+        <div className='max-w-measure space-y-5 text-body text-ink-soft'>
+          <p>
+            I studied frontend development at IT-Högskolan in Gothenburg and hold a bachelor’s degree in media and
+            communication studies from Uppsala University. My strength lies in combining the technical with the
+            communicative, resulting in digital experiences with a focus on UX and usability.
+          </p>
 
-        <Reveal delay={0.1} className='col-span-12 md:col-start-6 md:col-span-6'>
-          <div className='max-w-measure space-y-5 text-body text-ink-soft'>
-            <p className='text-lead text-ink'>
-              Hi, I’m Josefine — a fullstack developer with a background in UI design and communication.
-            </p>
+          <p>When I’m not coding, I enjoy crocheting, singing, running and spending time with my family, friends and my cat.</p>
+        </div>
+      </Reveal>
 
-            <p>
-              I studied frontend development at IT-Högskolan in Gothenburg and hold a bachelor’s degree in media and
-              communication studies from Uppsala University. My strength lies in combining the technical with the
-              communicative, resulting in digital experiences with a focus on UX and usability.
-            </p>
-
-            <p>When I’m not coding, I enjoy crocheting, singing, running and spending time with my family, friends and my cat.</p>
-          </div>
-
-          <dl className='mt-10'>
-            {facts.map(([term, value]) => (
-              <div key={term} className='flex flex-col gap-1 border-t border-hairline py-3 sm:flex-row sm:gap-8'>
-                <dt className='label text-ink-soft sm:w-28 sm:shrink-0'>{term}</dt>
-                <dd className='text-body'>{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
-      </div>
-    </section>
-  )
-}
+      <Reveal delay={0.15} className='col-span-12 md:col-start-7 md:col-span-6'>
+        <dl>
+          {facts.map(([term, value]) => (
+            <div key={term} className='flex flex-col gap-1 border-t border-hairline py-3 sm:flex-row sm:gap-8'>
+              <dt className='label text-ink-soft sm:w-28 sm:shrink-0'>{term}</dt>
+              <dd className='text-body'>{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </Reveal>
+    </div>
+  </section>
+)
 
 export default About

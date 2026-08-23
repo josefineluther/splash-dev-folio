@@ -4,24 +4,31 @@
 
 /* Designsystemet. Alla färger definieras här.
 
-   Sidan är en gallerivägg. Marken är varmt ljusgrå — den kulör gallerier
-   faktiskt målar väggar i när de hänger färgstark konst, eftersom grått får
-   färg att sjunga. Det finns medvetet INGEN accentfärg någonstans i sidans
-   chrome, inte ens i logotypen: all färg på sidan kommer från Josefines
-   egna verk. */
+   Sidan är nästan vit och andas långsamt: tre stora, mycket svaga färgmoln
+   glider omkring bakom innehållet. Kulörerna är mätta ur hero.webp, så
+   atmosfären är Josefines egen — men så tonad att sidan läses som vit vid
+   första anblick. Färgen ska kännas, inte ses.
+
+   Det finns ingen accentfärg i sidans chrome, inte ens i logotypen. All
+   tydlig färg kommer från verken. */
 
 @layer base {
   :root {
-    --wall: 40 5% 72%; /* #B8B6B1 — galleriväggen */
-    --ink: 260 8% 9%; /* #16151A — nästsvart med en aning violett */
-    --ink-soft: 250 7% 31%; /* #4A4954 */
-    --hairline: 40 5% 63%; /* #A5A39E */
+    --paper: 0 0% 100%;
+    --ink: 260 12% 17%; /* #2A2630 — varmt mörkt istället för nästsvart */
+    /* Mätt fram, inte gissad: med molnen på plats föll #6E6875 till 4.14:1
+       mot den mörkaste punkt gradienten skapar — under AA. Den här tonen
+       ligger på ~5.4:1 i värsta läget. */
+    --ink-soft: 261 7% 38%; /* #5F5A68 */
+    --hairline: 30 10% 90%; /* #E8E5E2 */
 
-    /* Verkets kulör, satt av useWallTint när ett verk är i vy. Standardvärdet
-       är väggen själv, så att color-mix blir en nolloperation innan dess.
-       Full färg och inte HSL-komponenter, så att hooken kan sätta hex direkt. */
-    --tint: #B8B6B1;
+    /* Gradientstoppen ur hero.webp. Används bara av AmbientGradient. */
+    --coral: 3 66% 75%; /* #EC9793 */
+    --rose: 351 22% 65%; /* #C18A90 */
+    --periwinkle: 249 13% 62%; /* #9394AA */
+    --sky: 205 52% 58%; /* #5E9ECB */
 
+    --radius: 0.75rem;
   }
 }
 
@@ -32,13 +39,7 @@
 
   body {
     color: hsl(var(--ink));
-
-    /* Väggen tar ljus från verket som hänger framför dig: bakgrunden blandas
-       8 % mot verkets kulör. Så låg andel att luminansen — och därmed
-       kontrasten mot texten — ligger kvar där den ska. */
-    background-color: hsl(var(--wall));
-    background-color: color-mix(in oklab, hsl(var(--wall)) 92%, var(--tint));
-    transition: background-color 1.2s ease;
+    background-color: hsl(var(--paper));
 
     /* Projektsvepet förskjuter innehållet i sidled och skulle annars blinka fram
        en horisontell scrollbar. `clip` skapar ingen scrollkontainer, till skillnad
@@ -56,12 +57,6 @@
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
-    }
-
-    /* Ingen tonande vägg vid reducerad rörelse — en färg som hoppar är värre
-       än ingen färgskiftning alls. useWallTint slutar sätta --tint. */
-    body {
-      transition: none;
     }
   }
 
@@ -85,8 +80,11 @@
   }
 
   /* Namnet i hero sätts för att exakt fylla textytans bredd.
-     8.4 är den uppmätta bredden på "JOSEFINE" i Syne ExtraBold med sidans
-     tracking (8.358em), avrundat uppåt så att sista versalen aldrig skär.
+     Divisorn 5.7 är den uppmätta bredden på "JOSEFINE" i Syne Bold med sidans
+     tracking (5.645em), avrundad uppåt så att sista versalen aldrig skär.
+     Måste mätas om vid varje ändring av vikt eller tracking: Syne varierar
+     kraftigt i bredd mellan vikterna — ExtraBold mätte 8.358em, alltså nästan
+     50 % bredare, och en gammal divisor gör att namnet slutar nå marginalen.
 
      Container-enheter och inte vw: 100vw räknar in rullisten, vilket skulle
      låta namnet spilla över kanten i en riktig webbläsare. Första raden är
@@ -96,20 +94,20 @@
   }
 
   .name-line {
-    font-size: calc((100vw - 3rem) / 8.4);
-    font-size: calc(100cqw / 8.4);
+    font-size: calc((100vw - 3rem) / 5.7);
+    font-size: calc(100cqw / 5.7);
   }
 
   @media (min-width: 768px) {
     .name-line {
-      font-size: calc((100vw - 5rem) / 8.4);
-      font-size: calc(100cqw / 8.4);
+      font-size: calc((100vw - 5rem) / 5.7);
+      font-size: calc(100cqw / 5.7);
     }
   }
 
-  /* Hängningen. Kolumnerna kommer ur projektets egen `hang` via --hang, men
-     bara från md och upp — under det stackar allt i full bredd. Inline-stil
-     skulle annars slå igenom även på mobil och spränga stackningen. */
+  /* Plåtens och etikettens kolumner, satta per verk via --hang, men bara
+     från md och upp — under det stackar allt i full bredd. Inline-stil skulle
+     annars slå igenom även på mobil och spränga stackningen. */
   .hang {
     grid-column: 1 / -1;
   }
@@ -119,9 +117,9 @@
       grid-column: var(--hang);
 
       /* Raden måste sättas explicit. Grids automatiska placering flyttar aldrig
-         markören bakåt, så ett verk vars etikett ligger i tidigare kolumner än
-         bilden (t.ex. bild 8–12, etikett 3–6) knuffas annars ner till rad 2 —
-         och bottenjusteringen mot plåten går förlorad. */
+         markören bakåt, så varannan rad — där etiketten ligger i tidigare
+         kolumner än bilden — knuffas annars ner till rad 2, och
+         bottenjusteringen mot plåten går förlorad. */
       grid-row: 1;
     }
   }

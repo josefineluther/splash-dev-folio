@@ -1,10 +1,8 @@
-import { useRef, type CSSProperties } from 'react'
+import { type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import type { Project } from '@/data/projects'
 import ImageFrame from '@/components/ImageFrame'
-import { useWallTint } from '@/lib/wall'
-import { cn } from '@/lib/utils'
 import { EASE_OUT } from '@/lib/motion'
 
 /** Skickar kolumnerna vidare som CSS-variabel — se .hang i index.css. */
@@ -43,67 +41,42 @@ const reveal = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE_OUT } }
 }
 
+interface WorkPlateProps {
+  project: Project
+  /** Varannan rad speglas, så bilderna vandrar i sidled nedför sidan. */
+  flipped: boolean
+}
+
 /**
- * Ett verk på väggen. Plåtens bredd och plats kommer ur projektets egen
- * `hang`; rastret är handsatt per verk, och plåtens storlek följer verkets
- * tyngd, så asymmetrin bär information.
+ * Ett verk. Alla plåtar är lika stora — halva bredden, 4:3 — så att inget verk
+ * väger tyngre än ett annat. Källbilderna är 1920×1440, alltså exakt 4:3, så
+ * halva bredden beskär ingenting.
  */
-const WorkPlate = ({ project }: { project: Project }) => {
-  const ref = useRef<HTMLElement>(null)
-
-  // Bred marginal: väggen ska skifta när verket står mitt i vyn, inte i det
-  // ögonblick dess kant nuddar den.
-  const inView = useInView(ref, { margin: '-35% 0px -35% 0px' })
-  useWallTint(project.tint, inView)
-
-  const { hang } = project
-  const { image } = hang
-
-  /* Kant-till-kant-plåten beskärs bredare. Bilderna är 4:3, men den tiltade
-     skärmen sitter i mitten med gott om gradient runt om — 16:9 skär bort
-     gradient, inte innehåll, och en 4:3 i full bredd blir 1080 px hög och
-     sväljer hela vyn. */
-  const plate = (
-    <Link to={`/project/${project.slug}`} aria-label={`${project.title} — open case`} className='group block'>
-      <ImageFrame
-        src={project.image}
-        alt={`${project.title} interface`}
-        className={cn(
-          'transition-transform duration-500 ease-out group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0',
-          image === 'bleed' ? 'aspect-[16/9]' : 'aspect-[4/3]'
-        )}
-      />
-    </Link>
-  )
+const WorkPlate = ({ project, flipped }: WorkPlateProps) => {
+  const image = flipped ? { start: 7, span: 6 } : { start: 1, span: 6 }
+  const label = flipped ? { start: 1, span: 5 } : { start: 8, span: 5 }
 
   return (
     <motion.article
-      ref={ref}
       variants={reveal}
       initial='hidden'
       whileInView='show'
       viewport={{ once: true, margin: '-10% 0px' }}
+      className='grid grid-cols-12 items-end gap-6 px-6 md:px-10'
     >
-      {image === 'bleed' ? (
-        <>
-          {/* Det tyngsta verket spränger rastret helt och går kant till kant. */}
-          {plate}
-          <div className='grid grid-cols-12 gap-6 px-6 pt-8 md:px-10'>
-            <div className='hang' style={hangStyle(hang.label.start, hang.label.span)}>
-              <WorkLabel project={project} />
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className='grid grid-cols-12 items-end gap-6 px-6 md:px-10'>
-          <div className='hang' style={hangStyle(image.start, image.span)}>
-            {plate}
-          </div>
-          <div className='hang' style={hangStyle(hang.label.start, hang.label.span)}>
-            <WorkLabel project={project} />
-          </div>
-        </div>
-      )}
+      <div className='hang' style={hangStyle(image.start, image.span)}>
+        <Link to={`/project/${project.slug}`} aria-label={`${project.title} — open case`} className='group block'>
+          <ImageFrame
+            src={project.image}
+            alt={`${project.title} interface`}
+            className='aspect-[4/3] rounded-plate transition-transform duration-500 ease-out group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0'
+          />
+        </Link>
+      </div>
+
+      <div className='hang' style={hangStyle(label.start, label.span)}>
+        <WorkLabel project={project} />
+      </div>
     </motion.article>
   )
 }
