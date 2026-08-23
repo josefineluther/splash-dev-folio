@@ -11,8 +11,16 @@
     <meta property="og:title" content="Josefine Luther — Fullstack developer" />
     <meta property="og:description" content="Fullstack developer in Gothenburg." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/favicon.png" />
-    <meta name="twitter:card" content="summary" />
+    <!-- Egen delningsbild, 1200x630. Faviconen dubblade tidigare som og:image,
+         men den är ett genomskinligt märke: plattformar som lägger den mot svart
+         gjorde den osynlig. Sökvägen är rot-relativ — byt till absolut URL när
+         domänen är satt, det är vad specen vill ha. -->
+    <meta property="og:image" content="/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Josefine Luther — fullstack developer in Gothenburg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/og.jpg" />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
 
