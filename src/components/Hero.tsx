@@ -63,7 +63,6 @@ const Hero = () => (
     >
       <div className='label space-y-1 text-ink-soft'>
         <p>Fullstack developer, Gothenburg</p>
-        <p>Five works, 2024—2026</p>
         <p className='text-ink'>Open to new work</p>
       </div>
 
