@@ -72,8 +72,8 @@ export const projects: Project[] = [
     title: 'Bokhyllan',
     kind: 'School project',
     date: '2025',
-    caption: 'A bookshop that filters by genre and works out the ‘3 for 2’ price at the till.',
-    medium: 'React, TypeScript, Express, PostgreSQL',
+    caption: 'A bookshop that filters by genre and takes card payment at the checkout.',
+    medium: 'React, TypeScript, Express, PostgreSQL, Stripe',
     context: 'IT-Högskolan',
     image: bokhyllanImg,
     description:
