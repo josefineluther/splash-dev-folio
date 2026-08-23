@@ -1,47 +1,37 @@
+import { useEffect } from 'react'
 import { useParams, useLocation, Link, Navigate } from 'react-router-dom'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
 import logoRed from '@/assets/logo-red.webp'
-import heroImg from '@/assets/hero.webp'
-import { projects, techTags } from '@/data/projects'
+import { projects, findProject } from '@/data/projects'
 import PageTransition from '@/components/PageTransition'
+import ImageFrame from '@/components/ImageFrame'
 import { contentContainer, contentItem, getDirection } from '@/lib/motion'
-
-const arrowClasses =
-  'text-primary inline-flex shrink-0 transition-[opacity,transform] duration-300 ease-out hover:opacity-60 motion-reduce:transform-none'
-
-/** Små sektionsetiketter i textblocket, i sidans befintliga formspråk. */
-const labelClasses = 'text-xs uppercase tracking-wider text-muted-foreground'
+import { useWallTint, resetWallTint } from '@/lib/wall'
 
 const ProjectDetail = () => {
-  const { id } = useParams()
+  const { slug } = useParams()
   const location = useLocation()
-  const projectId = parseInt(id || '0')
-  const project = projects[projectId]
+  const { project, index } = findProject(slug)
   const direction = getDirection(location.state)
 
-  const imgRef = useRef<HTMLImageElement>(null)
-  const [imgLoaded, setImgLoaded] = useState(false)
-
-  // En cachad bild kan vara färdigladdad innan React hinner koppla onLoad, vilket
-  // annars låser den på opacity-0 för alltid. Synka om vid varje projektbyte.
-  useEffect(() => {
-    setImgLoaded(false)
-    if (imgRef.current?.complete) setImgLoaded(true)
-  }, [projectId])
+  // Väggen tar verkets kulör så länge man står framför det.
+  useWallTint(project?.tint ?? '#B8B6B1', Boolean(project))
+  useEffect(() => resetWallTint, [])
 
   if (!project) return <Navigate to='/' replace />
 
-  const nextId = projectId > 0 ? projectId - 1 : projects.length - 1
-  const prevId = projectId < projects.length - 1 ? projectId + 1 : 0
-  const builtWith = techTags(project)
+  // Pilarna stegar i arrayordning, som är nyast först — så "nästa" pekar bakåt i tiden.
+  const prev = projects[index === 0 ? projects.length - 1 : index - 1]
+  const next = projects[index === projects.length - 1 ? 0 : index + 1]
 
   return (
-    <PageTransition className='bg-background relative'>
-      <div className='flex justify-start mt-5 ml-5 md:mt-10 md:ml-10'>
-        <Link to='/' className='text-primary hover:opacity-60 transition-opacity'>
-          <img src={logoRed} alt='Logo' className='w-11 h-11 md:w-16 md:h-16 mx-auto' />
+    <PageTransition className='flex min-h-screen flex-col'>
+      <div className='flex items-center justify-between px-6 py-6 md:px-10'>
+        <Link to='/' aria-label='Josefine Luther, back to start'>
+          <img src={logoRed} alt='' className='h-8 w-8 brightness-0' />
+        </Link>
+        <Link to='/' className='link-underline label'>
+          All works
         </Link>
       </div>
 
@@ -50,83 +40,51 @@ const ProjectDetail = () => {
           sättas explicit här — utan den ärvs ingen exit-label alls och den gamla
           sidan skulle försvinna direkt istället för att svepa ut. Barnen sätter
           ingen egen animate och ärver därför exit-labeln härifrån. */}
-      <motion.div
-        custom={direction}
-        variants={contentContainer}
-        initial='hidden'
-        animate='show'
-        exit='exit'
-        className='container mx-auto max-w-5xl px-4 mt-5'
-      >
-        {/* Pilarna ligger UTANFÖR de svepande blocken — de är navigering, inte
-            innehåll, och ska stå still medan projektet sveper förbi. */}
-        <div className='flex justify-between items-center m-2 gap-2'>
-          <Link to={`/project/${prevId}`} state={{ dir: -1 }} className={`${arrowClasses} hover:-translate-x-1`}>
-            <ChevronLeft size={40} strokeWidth={1.5} />
-          </Link>
-          <motion.div custom={direction} variants={contentItem} className='flex-1 min-w-0'>
-            <h1 className='text-xl md:text-3xl font-light tracking-tight uppercase text-center'>{project.title}</h1>
-          </motion.div>
-          <Link to={`/project/${nextId}`} state={{ dir: 1 }} className={`${arrowClasses} hover:translate-x-1`}>
-            <ChevronRight size={40} strokeWidth={1.5} />
-          </Link>
-        </div>
-
-        {/* Bilden i full bredd direkt under rubriken, som på referenslayouten. */}
-        <motion.div custom={direction} variants={contentItem} className='mt-6 md:mt-10'>
-          <img
-            ref={imgRef}
-            key={project.projectImage}
-            src={project.projectImage ? project.projectImage : heroImg}
-            alt={project.title}
-            decoding='async'
-            onLoad={() => setImgLoaded(true)}
-            className={`w-full rounded-lg object-cover transition-opacity duration-500 ease-out ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
-          />
+      <motion.div custom={direction} variants={contentContainer} initial='hidden' animate='show' exit='exit' className='flex-1'>
+        {/* Verket i full bredd, kant till kant. */}
+        <motion.div custom={direction} variants={contentItem}>
+          <ImageFrame src={project.image} alt={`${project.title} interface`} priority className='aspect-[16/9]' />
         </motion.div>
 
-        {/* Textblocket under bilden: bred kolumn för beskrivningen, smal för metadata. */}
-        <div className='grid md:grid-cols-3 gap-10 md:gap-12 mt-10 md:mt-16 pb-20'>
-          <motion.div custom={direction} variants={contentItem} className='md:col-span-2 space-y-4'>
-            <h2 className={labelClasses}>About the project</h2>
-            <p className='text-foreground/80 text-sm leading-7'>{project.description}</p>
+        <div className='grid grid-cols-12 gap-6 px-6 pt-12 md:px-10 md:pt-20'>
+          <motion.div custom={direction} variants={contentItem} className='col-span-12 md:col-span-5'>
+            <h1 className='font-display text-work font-bold'>{project.title}</h1>
+            <p className='label mt-4 text-ink-soft'>
+              {project.kind}, {project.date}
+            </p>
+            <div className='label mt-8 space-y-1'>
+              <p>{project.medium}</p>
+              <p className='text-ink-soft'>{project.context}</p>
+            </div>
+            {project.github && (
+              <a href={project.github} target='_blank' rel='noreferrer' className='link-underline label mt-8 inline-block'>
+                View on GitHub
+              </a>
+            )}
           </motion.div>
 
-          <motion.div custom={direction} variants={contentItem} className='space-y-8'>
-            <div className='space-y-3'>
-              <h2 className={labelClasses}>Year</h2>
-              <p className='text-sm text-foreground/80'>{project.date}</p>
-            </div>
-
-            {builtWith.length > 0 && (
-              <div className='space-y-3'>
-                <h2 className={labelClasses}>Built with</h2>
-                <ul>
-                  {builtWith.map((tag, tagIndex) => (
-                    <li key={tagIndex} className='text-sm text-foreground/80 border-t border-border py-2 last:pb-0'>
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {project.github && (
-              <div className='space-y-3'>
-                <h2 className={labelClasses}>Links</h2>
-                <a
-                  className='inline-block text-sm text-foreground/80 border-b-2 border-secondary pb-1 hover:opacity-60 transition-opacity'
-                  href={project.github}
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  View on GitHub
-                </a>
-              </div>
-            )}
+          <motion.div custom={direction} variants={contentItem} className='col-span-12 md:col-start-7 md:col-span-6'>
+            <p className='max-w-measure text-body text-ink-soft'>{project.description}</p>
           </motion.div>
         </div>
       </motion.div>
+
+      {/* Pilarna ligger UTANFÖR de svepande blocken — de är navigering, inte
+          innehåll, och ska stå still medan verket sveper förbi. */}
+      <nav className='mt-24 flex items-stretch justify-between gap-6 border-t border-hairline md:mt-32' aria-label='Works'>
+        <Link to={`/project/${prev.slug}`} state={{ dir: -1 }} className='group flex-1 px-6 py-8 md:px-10'>
+          <span className='label text-ink-soft'>Previous</span>
+          <span className='mt-2 block font-display text-section font-semibold group-hover:opacity-60'>{prev.title}</span>
+        </Link>
+        <Link
+          to={`/project/${next.slug}`}
+          state={{ dir: 1 }}
+          className='group flex-1 border-l border-hairline px-6 py-8 text-right md:px-10'
+        >
+          <span className='label text-ink-soft'>Next</span>
+          <span className='mt-2 block font-display text-section font-semibold group-hover:opacity-60'>{next.title}</span>
+        </Link>
+      </nav>
     </PageTransition>
   )
 }

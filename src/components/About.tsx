@@ -1,19 +1,61 @@
+import { useRef } from 'react'
+import { useInView } from 'framer-motion'
+import josefineImg from '@/assets/josefine.webp'
+import ImageFrame from '@/components/ImageFrame'
+import Reveal from '@/components/Reveal'
+import { useWallTint, WALL } from '@/lib/wall'
+
+/** Verktygen bor här, en rad, istället för i en egen sektion. */
+const facts = [
+  ['Based in', 'Gothenburg, Sweden'],
+  ['Studied', 'Frontend development, IT-Högskolan'],
+  ['And', 'BA media & communication, Uppsala'],
+  ['Works in', 'TypeScript, React, SvelteKit, Node, PostgreSQL, Figma']
+]
+
 const About = () => {
+  const ref = useRef<HTMLElement>(null)
+  const inView = useInView(ref, { margin: '-35% 0px -35% 0px' })
+
+  // Väggen går tillbaka till neutralt grått här. Kulören hör till verken;
+  // utan detta skulle sista verkets färg följa med genom resten av sidan.
+  useWallTint(WALL, inView)
+
   return (
-    <section id='about' className='py-20 md:py-32 px-4 bg-muted/30'>
-      <div className='container mx-auto max-w-3xl'>
-        <h2 className='text-2xl md:text-4xl font-light mb-6 md:mb-16 tracking-tight'>ABOUT</h2>
+    <section ref={ref} id='about' className='scroll-mt-20 px-6 py-24 md:px-10 md:py-40'>
+      <Reveal>
+        <h2 className='font-display text-section font-semibold'>About</h2>
+      </Reveal>
 
-        <div className='space-y-6 text-muted-foreground font-light text-md md:text-lg leading-relaxed'>
-          <p>Hi, I’m Josefine — a fullstack developer with a background in UI design and communication.</p>
+      <div className='mt-16 grid grid-cols-12 gap-6 md:mt-24'>
+        <Reveal className='col-span-12 md:col-span-4'>
+          <ImageFrame src={josefineImg} alt='Josefine Luther' className='aspect-[4/5]' />
+        </Reveal>
 
-          <p>
-            I studied frontend development at IT-Högskolan in Gothenburg and hold a bachelor’s degree in media and communication studies from Uppsala University.
-            My strength lies in combining the technical with the communicative, resulting in digital experiences with a focus on UX and usability.
-          </p>
+        <Reveal delay={0.1} className='col-span-12 md:col-start-6 md:col-span-6'>
+          <div className='max-w-measure space-y-5 text-body text-ink-soft'>
+            <p className='text-lead text-ink'>
+              Hi, I’m Josefine — a fullstack developer with a background in UI design and communication.
+            </p>
 
-          <p>When I’m not coding, I enjoy crocheting, singing, running and spending time with my family, friends and my cat.</p>
-        </div>
+            <p>
+              I studied frontend development at IT-Högskolan in Gothenburg and hold a bachelor’s degree in media and
+              communication studies from Uppsala University. My strength lies in combining the technical with the
+              communicative, resulting in digital experiences with a focus on UX and usability.
+            </p>
+
+            <p>When I’m not coding, I enjoy crocheting, singing, running and spending time with my family, friends and my cat.</p>
+          </div>
+
+          <dl className='mt-10'>
+            {facts.map(([term, value]) => (
+              <div key={term} className='flex flex-col gap-1 border-t border-hairline py-3 sm:flex-row sm:gap-8'>
+                <dt className='label text-ink-soft sm:w-28 sm:shrink-0'>{term}</dt>
+                <dd className='text-body'>{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
       </div>
     </section>
   )

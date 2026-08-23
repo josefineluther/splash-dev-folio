@@ -2,54 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
-All colors MUST be HSL.
-*/
+/* Designsystemet. Alla färger definieras här.
+
+   Sidan är en gallerivägg. Marken är varmt ljusgrå — den kulör gallerier
+   faktiskt målar väggar i när de hänger färgstark konst, eftersom grått får
+   färg att sjunga. Det finns medvetet INGEN accentfärg någonstans i sidans
+   chrome, inte ens i logotypen: all färg på sidan kommer från Josefines
+   egna verk. */
 
 @layer base {
   :root {
-    --background: 30 20% 97%;
-    --foreground: 0 35% 25%;
+    --wall: 40 5% 72%; /* #B8B6B1 — galleriväggen */
+    --ink: 260 8% 9%; /* #16151A — nästsvart med en aning violett */
+    --ink-soft: 250 7% 31%; /* #4A4954 */
+    --hairline: 40 5% 63%; /* #A5A39E */
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 35% 25%;
+    /* Verkets kulör, satt av useWallTint när ett verk är i vy. Standardvärdet
+       är väggen själv, så att color-mix blir en nolloperation innan dess.
+       Full färg och inte HSL-komponenter, så att hooken kan sätta hex direkt. */
+    --tint: #B8B6B1;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 35% 25%;
-
-    --primary: 0 40% 30%;
-    --primary-foreground: 30 25% 92%;
-
-    --secondary: 200 70% 50%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 30 15% 90%;
-    --muted-foreground: 0 20% 45%;
-
-    --hero-primary: 30 25% 92%;
-    --hero-muted: 30 20% 85%;
-
-    --accent: 15 75% 60%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 200 60% 65%;
-    --input: 30 20% 85%;
-    --ring: 0 40% 30%;
-
-    --radius: 0.5rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--hairline));
   }
 
   body {
-    @apply bg-background text-foreground;
+    color: hsl(var(--ink));
+
+    /* Väggen tar ljus från verket som hänger framför dig: bakgrunden blandas
+       8 % mot verkets kulör. Så låg andel att luminansen — och därmed
+       kontrasten mot texten — ligger kvar där den ska. */
+    background-color: hsl(var(--wall));
+    background-color: color-mix(in oklab, hsl(var(--wall)) 92%, var(--tint));
+    transition: background-color 1.2s ease;
 
     /* Projektsvepet förskjuter innehållet i sidled och skulle annars blinka fram
        en horisontell scrollbar. `clip` skapar ingen scrollkontainer, till skillnad
@@ -58,7 +47,7 @@ All colors MUST be HSL.
     overflow-x: clip;
   }
 
-  /* Mjuk scroll för ankarlänkarna i hero (#projects, #contact).
+  /* Mjuk scroll för ankarlänkarna i nav (#works, #about, #contact).
      Programmatisk scroll måste därför använda behavior: 'instant' — se PageTransition. */
   html {
     scroll-behavior: smooth;
@@ -67,6 +56,103 @@ All colors MUST be HSL.
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+    }
+
+    /* Ingen tonande vägg vid reducerad rörelse — en färg som hoppar är värre
+       än ingen färgskiftning alls. useWallTint slutar sätta --tint. */
+    body {
+      transition: none;
+    }
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ink));
+    outline-offset: 4px;
+  }
+}
+
+@layer components {
+  /* Etiketten på väggen: 11 px, brett spärrad. Sidans minsta typografiska
+     enhet, mot namnet som är närmare 200 px — den skalkontrasten är hela
+     galleriuttrycket. */
+  .label {
+    font-family: Archivo, ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Namnet i hero sätts för att exakt fylla textytans bredd.
+     8.4 är den uppmätta bredden på "JOSEFINE" i Syne ExtraBold med sidans
+     tracking (8.358em), avrundat uppåt så att sista versalen aldrig skär.
+
+     Container-enheter och inte vw: 100vw räknar in rullisten, vilket skulle
+     låta namnet spilla över kanten i en riktig webbläsare. Första raden är
+     reserv för webbläsare utan cqw. */
+  .name-fit {
+    container-type: inline-size;
+  }
+
+  .name-line {
+    font-size: calc((100vw - 3rem) / 8.4);
+    font-size: calc(100cqw / 8.4);
+  }
+
+  @media (min-width: 768px) {
+    .name-line {
+      font-size: calc((100vw - 5rem) / 8.4);
+      font-size: calc(100cqw / 8.4);
+    }
+  }
+
+  /* Hängningen. Kolumnerna kommer ur projektets egen `hang` via --hang, men
+     bara från md och upp — under det stackar allt i full bredd. Inline-stil
+     skulle annars slå igenom även på mobil och spränga stackningen. */
+  .hang {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 768px) {
+    .hang {
+      grid-column: var(--hang);
+
+      /* Raden måste sättas explicit. Grids automatiska placering flyttar aldrig
+         markören bakåt, så ett verk vars etikett ligger i tidigare kolumner än
+         bilden (t.ex. bild 8–12, etikett 3–6) knuffas annars ner till rad 2 —
+         och bottenjusteringen mot plåten går förlorad. */
+      grid-row: 1;
+    }
+  }
+
+  /* Understrykning som ritas in från vänster. transform är billigare att
+     animera än width. */
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.15em;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .link-underline::after {
+      transition: none;
     }
   }
 }

@@ -1,54 +1,43 @@
-import { Github, Linkedin, Mail } from 'lucide-react'
+import Reveal from '@/components/Reveal'
 
-const socialLinks = [
-  {
-    icon: <Github size={20} strokeWidth={1.5} />,
-    url: 'https://github.com/josefineluther',
-    label: 'GitHub'
-  },
-  {
-    icon: <Linkedin size={20} strokeWidth={1.5} />,
-    url: 'https://www.linkedin.com/in/josefineluther',
-    label: 'LinkedIn'
-  }
+const links = [
+  { href: 'https://github.com/josefineluther', label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/josefineluther', label: 'LinkedIn' }
 ]
 
-const Contact = () => {
-  return (
-    <section id='contact' className='py-20 md:py-32 px-4'>
-      <div className='container mx-auto max-w-5xl'>
-        <h2 className='text-2xl md:text-4xl font-light mb-6 md:mb-16 tracking-tight'>CONTACT</h2>
+/**
+ * Kolofonen. En katalog slutar med sina uppgifter, inte med en uppmaning —
+ * så adressen står stort och resten som etiketter.
+ */
+const Contact = () => (
+  <section id='contact' className='scroll-mt-20 border-t border-hairline px-6 py-24 md:px-10 md:py-32'>
+    <Reveal>
+      <p className='label text-ink-soft'>Open to new work</p>
+      <a
+        href='mailto:josefineluther@hotmail.se'
+        className='link-underline mt-6 inline-block break-words font-display text-contact font-bold'
+      >
+        josefineluther@hotmail.se
+      </a>
+    </Reveal>
 
-        <div className='grid md:grid-cols-2 gap-12'>
-          <div className='space-y-6 font-light'>
-            <p className='text-muted-foreground'>I'm open to new work opportunities!</p>
-            <div className='space-y-3'>
-              <a href='mailto:josefineluther@hotmail.se' className='inline-block hover:opacity-60 transition-opacity border-b-2 border-secondary pb-1'>
-                josefineluther@hotmail.se
-              </a>
-              <div className='flex gap-6 pt-4'>
-                {socialLinks.map((link, index) => (
-                  <a
-                    key={index}
-                    href={link.url}
-                    className='hover:opacity-60 transition-opacity inline-flex items-center gap-2 border-b-2 border-secondary pb-1'
-                    aria-label={link.label}
-                  >
-                    {link.icon}
-                    <span className='text-sm'>{link.label}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+    <Reveal delay={0.1} className='mt-16 flex flex-col gap-8 md:mt-24 md:flex-row md:justify-between'>
+      <ul className='flex gap-8'>
+        {links.map(link => (
+          <li key={link.label}>
+            <a href={link.href} target='_blank' rel='noreferrer' className='link-underline label'>
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
 
-        <footer className='mt-32 pt-8 border-t border-border'>
-          <p className='text-sm text-muted-foreground font-light'>Dev & design by Josefine Luther</p>
-        </footer>
+      <div className='label space-y-1 text-ink-soft md:text-right'>
+        <p>Dev &amp; design by Josefine Luther</p>
+        <p>Gothenburg, Sweden</p>
       </div>
-    </section>
-  )
-}
+    </Reveal>
+  </section>
+)
 
 export default Contact

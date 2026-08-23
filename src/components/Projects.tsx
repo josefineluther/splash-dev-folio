@@ -1,43 +1,23 @@
-import { Link } from 'react-router-dom'
-import heroImg from '@/assets/hero.webp'
 import { projects } from '@/data/projects'
+import WorkPlate from '@/components/WorkPlate'
+import Reveal from '@/components/Reveal'
 
-const Projects = () => {
-  return (
-    <section id='projects' className='py-20 md:py-32 px-4 bg-muted/30'>
-      <div className='container mx-auto max-w-5xl'>
-        <h2 className='text-2xl md:text-4xl font-light mb-4 tracking-tight'>PROJECTS</h2>
-        <p className='text-muted-foreground mb-6 md:mb-16 font-light'>Click on project to read more.</p>
+/**
+ * Väggen. Inget yttre max-width och ingen sidopadding på sektionen — det
+ * tyngsta verket ska kunna gå kant till kant.
+ */
+const Projects = () => (
+  <section id='works' className='scroll-mt-20 py-24 md:py-40'>
+    <Reveal className='px-6 md:px-10'>
+      <h2 className='font-display text-section font-semibold'>Works</h2>
+    </Reveal>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-          {projects
-            .slice()
-            .reverse()
-            .map((project, index) => (
-              <Link key={index} to={`/project/${project.id}`} className='group cursor-pointer'>
-                <div className='aspect-[1/1] md:aspect-[3/4] mb-3 md:mb-4 overflow-hidden'>
-                  <img
-                    src={project.firstImage ? project.firstImage : heroImg}
-                    loading='lazy'
-                    className='w-full h-full object-cover transition-[transform,opacity] duration-500 ease-out group-hover:scale-[1.03] group-hover:opacity-90 motion-reduce:transform-none motion-reduce:transition-none'
-                    alt={project.title}
-                  />
-                </div>
-                <h3 className='text-lg font-light mb-2 group-hover:opacity-60 transition-opacity'>{project.title}</h3>
-                <div className='flex flex-wrap gap-2 text-xs text-muted-foreground mb-3 md:mb-1'>
-                  {project.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex}>
-                      {tag}
-                      {tagIndex < project.tags.length - 1 ? ' /' : ''}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+    <div className='mt-16 space-y-24 md:mt-24 md:space-y-32'>
+      {projects.map(project => (
+        <WorkPlate key={project.slug} project={project} />
+      ))}
+    </div>
+  </section>
+)
 
 export default Projects

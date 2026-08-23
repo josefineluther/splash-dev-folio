@@ -25,3 +25,6 @@ dist-ssr
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Källfiler för bildexport, inte del av bygget
+png-export/
