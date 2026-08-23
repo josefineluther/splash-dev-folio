@@ -38,10 +38,12 @@ const About = () => (
       </Reveal>
 
       <Reveal delay={0.15} className='col-span-12 md:col-start-7 md:col-span-6'>
-        <dl>
+        {/* Måttet hindrar hårstrecken från att löpa ut i tomrum: raderna satt
+            i sex kolumner medan innehållet behövde drygt hälften. */}
+        <dl className='max-w-xl'>
           {facts.map(([term, value]) => (
             <div key={term} className='flex flex-col gap-1 border-t border-hairline py-3 sm:flex-row sm:gap-8'>
-              <dt className='label text-ink-soft sm:w-28 sm:shrink-0'>{term}</dt>
+              <dt className='label text-ink-soft sm:w-24 sm:shrink-0'>{term}</dt>
               <dd className='text-body'>{value}</dd>
             </div>
           ))}
