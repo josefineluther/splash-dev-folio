@@ -1,3 +1,4 @@
+import upphandlingsmaskinenImg from '@/assets/upphandlingsmaskinen.webp'
 import decthingsImg from '@/assets/decthings.webp'
 import skiathosCatsImg from '@/assets/skiathos_cats.webp'
 import bokhyllanImg from '@/assets/bokhyllan.webp'
@@ -9,6 +10,7 @@ export interface Project {
   id: number
   /** Används i URL:en: /project/bronte */
   slug: string
+  /** Kan innehålla mjukt bindestreck (\u00AD) som brytpunkt — se `useDocumentTitle`. */
   title: string
   /** Etikettens andra rad: vad slags arbete, och årtalet. */
   kind: string
@@ -37,6 +39,23 @@ export interface Project {
  * pekar på rätt verk; uppslagning sker på slug eller id, aldrig på position.
  */
 export const projects: Project[] = [
+  {
+    id: 5,
+    slug: 'upphandlingsmaskinen',
+    /* Mjukt bindestreck (U+00AD): ordet är 20 tecken och sprängde rubrikens
+       rad på smala skärmar. Det bryts på mitten med ett synligt bindestreck
+       när det behövs, och står helt när det får plats. */
+    title: 'Upphandlings\u00ADmaskinen',
+    kind: 'Client project',
+    date: '2026',
+    caption: 'Turns a folder of public procurement documents into a drafted bid.',
+    medium: 'Next.js, React, TypeScript, PostgreSQL, Vercel AI SDK',
+    context: 'In production, built at Göta IT',
+    image: upphandlingsmaskinenImg,
+    description:
+      "Upphandlingsmaskinen turns a folder of public procurement documents into a drafted bid. It reads the underlag, decides what counts as a requirement, sorts the requirements into categories and writes an answer to each one, drawing on the agency's own reference cases, CVs and earlier bids through a library that syncs from their Google Drive every hour. Requirements that need an attachment get a document generated and exported to DOCX, and every answer is scored against its requirement with suggestions for what could be added. The team then reviews, rewrites and ticks off. I built the frontend and the user experience in Next.js and React, where the hard part was fitting a very dense bid view into one screen a person can still read. It was written for a Swedish group of communication agencies whose bids used to take around 50 working hours each.",
+    github: ''
+  },
   {
     id: 4,
     slug: 'bronte',
@@ -128,3 +147,9 @@ export const findProject = (param: string | undefined) => {
 
   return { project: index === -1 ? undefined : projects[index], index }
 }
+
+/**
+ * Titeln utan de mjuka bindestrecken. Brytpunkterna hör hemma i rubriken,
+ * inte i alt-texter och etiketter som läses upp.
+ */
+export const plainTitle = (project: Project) => project.title.replace(/\u00AD/g, '')

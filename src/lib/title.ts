@@ -9,7 +9,10 @@ const BASE = 'Josefine Luther — Fullstack developer'
  */
 export const useDocumentTitle = (title?: string, description?: string) => {
   useEffect(() => {
-    document.title = title ? `${title} — Josefine Luther` : BASE
+    /* Verktitlarna kan bära mjuka bindestreck för radbrytning i rubriken.
+       De hör inte hemma i flikar, bokmärken eller delade länkar. */
+    const plain = title?.replace(/\u00AD/g, '')
+    document.title = plain ? `${plain} — Josefine Luther` : BASE
 
     if (description) {
       const meta = document.querySelector('meta[name="description"]')

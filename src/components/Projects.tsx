@@ -10,9 +10,13 @@ const Projects = () => (
       <h2 id='works' className='scroll-mt-24 font-display text-section font-semibold'>Works</h2>
     </Reveal>
 
+    {/* Varannan plåt speglas, men räknat bakifrån: den sista står alltid med
+        bilden till vänster, oavsett hur många verk listan innehåller. Därför
+        avgör antalet vilken sida den första hamnar på — jämnt antal börjar
+        till höger, ojämnt till vänster. */}
     <div className='mt-16 space-y-24 md:mt-24 md:space-y-32'>
       {projects.map((project, index) => (
-        <WorkPlate key={project.slug} project={project} flipped={index % 2 === 1} />
+        <WorkPlate key={project.slug} project={project} flipped={(projects.length + index) % 2 === 0} />
       ))}
     </div>
   </section>

@@ -1,7 +1,7 @@
 import { type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import type { Project } from '@/data/projects'
+import { plainTitle, type Project } from '@/data/projects'
 import ImageFrame from '@/components/ImageFrame'
 import { EASE_OUT } from '@/lib/motion'
 
@@ -68,10 +68,10 @@ const WorkPlate = ({ project, flipped }: WorkPlateProps) => {
       className='grid grid-cols-12 items-end gap-6 px-6 md:px-10'
     >
       <div className='hang' style={hangStyle(image.start, image.span)}>
-        <Link to={`/project/${project.slug}`} aria-label={`${project.title} — open case`} className='group block'>
+        <Link to={`/project/${project.slug}`} aria-label={`${plainTitle(project)} — open case`} className='group block'>
           <ImageFrame
             src={project.image}
-            alt={`${project.title} interface`}
+            alt={`${plainTitle(project)} interface`}
             className='aspect-[4/3] rounded-plate transition-transform duration-500 ease-out group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0'
           />
         </Link>

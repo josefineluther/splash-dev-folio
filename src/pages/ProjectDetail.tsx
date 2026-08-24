@@ -1,7 +1,7 @@
 import { useParams, useLocation, Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import logoRed from '@/assets/logo-red.webp'
-import { projects, findProject } from '@/data/projects'
+import { projects, findProject, plainTitle } from '@/data/projects'
 import PageTransition from '@/components/PageTransition'
 import ImageFrame from '@/components/ImageFrame'
 import { contentContainer, contentItem, getDirection } from '@/lib/motion'
@@ -66,7 +66,7 @@ const ProjectDetail = () => {
         <motion.div custom={direction} variants={contentItem} className='px-6 md:px-10'>
           <ImageFrame
             src={project.image}
-            alt={`${project.title} interface`}
+            alt={`${plainTitle(project)} interface`}
             priority
             className='aspect-[4/3] rounded-plate md:aspect-[16/9]'
           />
