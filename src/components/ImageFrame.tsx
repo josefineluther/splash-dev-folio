@@ -1,9 +1,27 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 
+/**
+ * Projektbilderna är alltid 1920 px breda, och en @2x-variant alltid 3840.
+ * Bredderna står här och inte hos anroparen, eftersom de är en egenskap hos
+ * exporten och inte hos platsen bilden visas på.
+ */
+const WIDTH_1X = 1920
+const WIDTH_2X = 3840
+
 interface ImageFrameProps {
   src: string
+  /**
+   * Dubbla upplösningen, för de verk som har en. Utan den serveras `src`
+   * överallt — vilket på en retinaskärm betyder att bilden skalas upp.
+   */
+  src2x?: string
   alt: string
+  /**
+   * Hur bred bilden faktiskt blir. Krävs tillsammans med `src2x`: utan den
+   * antar webbläsaren full fönsterbredd och hämtar alltid den stora filen.
+   */
+  sizes?: string
   /** Sätt på bilder som syns direkt vid sidladdning. Stänger av lazy-load. */
   priority?: boolean
   className?: string
@@ -19,7 +37,7 @@ interface ImageFrameProps {
  *
  * Formatet sätts av föräldern (aspect-*), inte här.
  */
-const ImageFrame = ({ src, alt, priority = false, className }: ImageFrameProps) => {
+const ImageFrame = ({ src, src2x, alt, sizes, priority = false, className }: ImageFrameProps) => {
   const imgRef = useRef<HTMLImageElement | null>(null)
   const seenSrc = useRef(src)
   const [loaded, setLoaded] = useState(false)
@@ -52,6 +70,7 @@ const ImageFrame = ({ src, alt, priority = false, className }: ImageFrameProps) 
       <img
         ref={attachRef}
         src={src}
+        {...(src2x ? { srcSet: `${src} ${WIDTH_1X}w, ${src2x} ${WIDTH_2X}w`, sizes } : {})}
         alt={alt}
         loading={priority ? 'eager' : 'lazy'}
         decoding='async'

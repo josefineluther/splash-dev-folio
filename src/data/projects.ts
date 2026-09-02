@@ -1,3 +1,4 @@
+import enensByggImg from '@/assets/enens_bygg.webp'
 import upphandlingsmaskinenImg from '@/assets/upphandlingsmaskinen.webp'
 import decthingsImg from '@/assets/decthings.webp'
 import skiathosCatsImg from '@/assets/skiathos_cats.webp'
@@ -25,8 +26,15 @@ export interface Project {
   /** Etikettens sista rad: sammanhang eller proveniens. */
   context: string
   image: string
+  /**
+   * Samma bild i 3840 px, för de verk som har en högupplöst export. Case-sidan
+   * visar bilden i hela innehållsbredden och skalar annars upp 1920-versionen.
+   */
+  image2x?: string
   /** Den långa texten, på verkets egen sida. */
   description: string
+  /** Sajten, om den är publik. Utan den visas ingen länk. */
+  live?: string
   github: string
 }
 
@@ -39,6 +47,22 @@ export interface Project {
  * pekar på rätt verk; uppslagning sker på slug eller id, aldrig på position.
  */
 export const projects: Project[] = [
+  {
+    id: 6,
+    slug: 'enens-bygg',
+    title: 'Enens Bygg',
+    kind: 'Client project',
+    date: '2026',
+    caption:
+      'A construction firm’s site, with a project gallery and a form that sends enquiries straight to their inbox.',
+    medium: 'Next.js, React, TypeScript, Resend',
+    context: 'In production at enensbygg.se, built at Göta IT',
+    image: enensByggImg,
+    description:
+      'Enens Bygg is the website of a construction firm in Kungsbacka that has been building since 1998. It is a static site with pages for their services and their partners, and a gallery where finished jobs are shown as photographs rather than described in text, because the work is the kind a prospective customer wants to see before they ask for anything. What the site really has to do is turn a visitor into a request for a quote, so the contact form is reachable from every page and the enquiry goes straight to the firm’s own inbox through Resend — there is no admin to log into and nothing for them to maintain. I built it in Next.js with React and TypeScript for a client at Göta IT.',
+    live: 'https://enensbygg.se',
+    github: ''
+  },
   {
     id: 5,
     slug: 'upphandlingsmaskinen',

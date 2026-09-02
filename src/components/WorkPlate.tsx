@@ -71,7 +71,11 @@ const WorkPlate = ({ project, flipped }: WorkPlateProps) => {
         <Link to={`/project/${project.slug}`} aria-label={`${plainTitle(project)} — open case`} className='group block'>
           <ImageFrame
             src={project.image}
+            src2x={project.image2x}
             alt={`${plainTitle(project)} interface`}
+            /* Sex av tolv kolumner med gap, alltså strax under halva fönstret.
+               Under md stackar .hang i full bredd minus px-6. */
+            sizes='(min-width: 768px) 48vw, calc(100vw - 3rem)'
             className='aspect-[4/3] rounded-plate transition-transform duration-500 ease-out group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0'
           />
         </Link>

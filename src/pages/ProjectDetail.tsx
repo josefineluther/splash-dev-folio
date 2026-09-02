@@ -66,7 +66,10 @@ const ProjectDetail = () => {
         <motion.div custom={direction} variants={contentItem} className='px-6 md:px-10'>
           <ImageFrame
             src={project.image}
+            src2x={project.image2x}
             alt={`${plainTitle(project)} interface`}
+            /* Hela innehållsbredden — bara sidmarginalerna räknas bort. */
+            sizes='(min-width: 768px) calc(100vw - 5rem), calc(100vw - 3rem)'
             priority
             className='aspect-[4/3] rounded-plate md:aspect-[16/9]'
           />
@@ -79,10 +82,22 @@ const ProjectDetail = () => {
               <p className='text-ink-soft'>{project.context}</p>
             </div>
 
-            {project.github && (
-              <a href={project.github} target='_blank' rel='noreferrer' className='link-underline label inline-block'>
-                View on GitHub
-              </a>
+            {/* Live-sajten först: på ett klientprojekt är den det man faktiskt vill öppna.
+                Länkarna delar ett omslag, så att avståndet till etiketten ovanför förblir
+                kolumnens space-y-8 medan de två länkarna själva står tätt ihop. */}
+            {(project.live || project.github) && (
+              <div className='flex flex-col items-start gap-2'>
+                {project.live && (
+                  <a href={project.live} target='_blank' rel='noreferrer' className='link-underline label'>
+                    Visit site
+                  </a>
+                )}
+                {project.github && (
+                  <a href={project.github} target='_blank' rel='noreferrer' className='link-underline label'>
+                    View on GitHub
+                  </a>
+                )}
+              </div>
             )}
           </motion.div>
 
